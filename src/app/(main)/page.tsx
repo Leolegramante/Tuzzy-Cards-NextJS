@@ -1,12 +1,9 @@
 import {Carousel, CategoryList, LatestProducts, PageContainer} from "@/components";
-import Amarelo from '../../../public/assets/Amarelo.png';
-import Azul from '../../../public/assets/Azul.png';
-import Rosa from '../../../public/assets/Rosa.png';
-import Verde from '../../../public/assets/Verde.png';
-import Vermelho from '../../../public/assets/Vermelho.png';
+import bannerPrincipal from '../../../public/assets/banner-1.png';
+import bannerSecundario from '../../../public/assets/banner-2.png';
 
 export default function Home() {
-    const images = [Vermelho, Azul, Verde, Rosa, Amarelo];
+    const images = [bannerPrincipal, bannerSecundario];
     return (
         <>
             <PageContainer className='min-h-0 background-pattern max-w-screen px-0 lg:px-0 py-0 pt-4'>
