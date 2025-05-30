@@ -57,7 +57,7 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
 
     return (
         <div className='max-w-screen'>
-            <div className='flex flex-col items-center space-y-4 overflow-hidden'>
+            <div className='flex flex-col items-center space-y-4 overflow-hidden mt-3'>
                 <div className='flex items-center space-x-4 '>
                     <div className="flex space-x-2">
                         {prevIndices.map((idx, i) => (
@@ -97,7 +97,7 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
                                 aria-label={`Ir para imagem ${index + 1}`}
                                 className={cn(
                                     'w-3 h-3 rounded-full transition',
-                                    index === activeIndex ? 'bg-blue-500' : 'bg-gray-300'
+                                    index === activeIndex ? 'bg-principal' : 'bg-gray-300'
                                 )}
                             />
                         ))}

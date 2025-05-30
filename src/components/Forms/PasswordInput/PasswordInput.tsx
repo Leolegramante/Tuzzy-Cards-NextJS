@@ -38,9 +38,9 @@ export function PasswordInput({
                     type={inputType}
                     name={name}
                     className={cn(
-                        "py-1.5 px-3 ps-4 pe-10 block w-full rounded-lg text-principal font-normal outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-fy sm:text-sm/6 border-2 border-transparent disabled:opacity-50 disabled:pointer-events-none ",
+                        "py-1.5 px-3 ps-4 pe-10 block w-full rounded-lg text-principal font-normal ring-2 ring-inset ring-principal focus:ring-2 focus:ring-inset focus:ring-fy sm:text-sm/6 border-2 border-transparent disabled:opacity-50 disabled:pointer-events-none ",
                         {
-                            "border-red-500": !!error,
+                            "ring-red-500 focus:ring-red-500": !!error,
                         }
                     )}
                     {...props}

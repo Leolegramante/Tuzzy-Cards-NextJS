@@ -27,7 +27,7 @@ export function PriceInput({label, error, ...props}: PriceInputProps) {
             {label ? <label className="block text-sm font-semibold text-principal">{label}</label> : null}
             <div>
                 <div
-                    className="flex items-center rounded-md bg-white px-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-fy h-10">
+                    className="flex items-center rounded-md bg-white px-3 ring-2 ring-inset ring-principal focus-within:ring-2 focus-within:ring-inset focus-within:ring-fy h-10">
                     <input
                         id="price"
                         name="price"

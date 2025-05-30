@@ -42,19 +42,7 @@
     }
 }
 
-@theme {
-    --color-background: var(--background);
-    --color-foreground: var(--foreground);
-    --color-principal: var(--pricipal);
-    --color-fy: var(--font-yellow);
-}
-
 body {
-    /*background-image: url('../../public/assets/background/PatternFront.png');*/
-    /*background-size: cover;*/
-    /*background-position: center;*/
-    /*background-repeat: no-repeat;*/
-    /*background-attachment: fixed;*/
     background-color: var(--background);
     color: var(--font-yellow);
     font-family: Roboto, sans-serif;

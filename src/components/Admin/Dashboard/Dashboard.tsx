@@ -24,7 +24,7 @@ export const AdminDashboard = () => {
         })
     }, []);
     return (
-        <div className='grid grid-cols-4 gap-6 text-principal'>
+        <div className='grid grid-cols-1 md:grid-cols-4 gap-6 text-principal'>
             <DashboardCard name='Numero de usuários cadastrados' count={userCount}/>
             <DashboardCard name='total de produtos cadastrados' count={productsCount.count}/>
             <DashboardCard name='Total de produtos em estoque' count={productsCount.amount}/>

@@ -72,7 +72,6 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
     return (
         <div className="flex flex-col items-center space-y-4 overflow-hidden">
             <div className="flex items-center space-x-4">
-                {/* Imagens Laterais Esquerda */}
                 <div className="flex space-x-2">
                     {prevIndices.map((idx, i) => (
                         <button
@@ -96,7 +95,6 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                     ))}
                 </div>
 
-                {/* Imagem Principal */}
                 <div className={'relative'} style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
                     <Image
                         src={images[activeIndex].src}
@@ -109,7 +107,6 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                     />
                 </div>
 
-                {/* Imagens Laterais Direita */}
                 <div className="flex space-x-2">
                     {nextIndices.map((idx, i) => (
                         <button
@@ -134,7 +131,6 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                 </div>
             </div>
 
-            {/* Central de Navegação com setas e bolinhas */}
             <div className='flex'>
                 <Image src={LeftNavigationTriangle} alt={''} height={40} className='h-10 w-auto'/>
                 <div className="flex items-center justify-between space-x-4 bg-white px-2">

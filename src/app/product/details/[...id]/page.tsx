@@ -177,7 +177,7 @@ const ProductDetailsPage = () => {
                                 <h2 className="text-lg font-medium text-gray-900">Descrição do produto</h2>
                                 <div
                                     dangerouslySetInnerHTML={{__html: product.description}}
-                                    className="mt-4 space-y-4 text-mb text-principal/80"
+                                    className="mt-4 space-y-4 text-mb text-principal"
                                 />
                             </div>
                         </div>

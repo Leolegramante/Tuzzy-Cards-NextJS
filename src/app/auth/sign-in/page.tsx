@@ -7,7 +7,7 @@ import logo from '../../../../public/assets/logo/PrincpalDourado.png'
 
 export default function SignInPage() {
     return (
-        <div className="flex flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-svh">
+        <div className="flex flex-1 flex-col justify-center py-12 sm:px-6 lg:px-8 min-h-svh background-pattern">
             <div className="flex items-center justify-center sm:mx-auto sm:w-full sm:max-w-md">
                 <Image
                     alt="Your Company"

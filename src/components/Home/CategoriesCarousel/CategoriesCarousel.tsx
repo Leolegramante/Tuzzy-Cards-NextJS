@@ -130,13 +130,13 @@ export function CategoriesCarousel() {
             <div className='w-full'>
                 <h3 className='font-semibold text-xl text-principal text-center'>Busque por categoria</h3>
             </div>
-            <div className='w-full max-w-7xl mx-auto'>
+            <div className='w-full max-w-7xl mx-auto pt-2'>
                 <div className="flex flex-col items-center space-y-4 overflow-hidden">
                     <div className="flex items-center justify-start space-x-4">
                         <div className="flex space-x-2">
                             {prevIndices.map((idx) => (
                                 <div key={categoriesNavigation[idx].name}
-                                     className='flex group flex-col items-center justify-start cursor-pointer h-52'>
+                                     className='flex group flex-col items-center justify-start cursor-pointer h-52 w-[208px]'>
                                     <Link
                                         href={categoriesNavigation[idx].href}
                                         className='flex flex-col justify-center items-center  background-main-page-categories-items w-40 h-40'
@@ -153,7 +153,7 @@ export function CategoriesCarousel() {
                             ))}
                         </div>
                         <div
-                            className='flex group flex-col items-center justify-start cursor-pointer h-52'>
+                            className='flex group flex-col items-center justify-start cursor-pointer h-52 w-[208px]'>
                             <Link
                                 href={categoriesNavigation[activeIndex].href}
                                 className='flex flex-col justify-center items-center  background-main-page-categories-items w-40 h-40'
@@ -170,7 +170,7 @@ export function CategoriesCarousel() {
                         <div className="flex space-x-2">
                             {nextIndices.map((idx) => (
                                 <div key={categoriesNavigation[idx].name}
-                                     className='flex group flex-col items-center justify-start cursor-pointer h-52'>
+                                     className='flex group flex-col items-center justify-start cursor-pointer h-52 w-[208px]'>
                                     <Link
                                         href={categoriesNavigation[idx].href}
                                         className='flex flex-col justify-center items-center  background-main-page-categories-items w-40 h-40'

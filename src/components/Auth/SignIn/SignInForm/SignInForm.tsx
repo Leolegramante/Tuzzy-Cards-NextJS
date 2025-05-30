@@ -40,12 +40,14 @@ export default function SignInForm() {
                 name="email"
                 label="E-mail"
                 inputMode="email"
+                placeholder="exemplo@email.com"
                 defaultValue={state.email}
                 error={state.errors?.email}
             />
             <PasswordInput
                 name="password"
                 label="Senha"
+                placeholder="Digite sua senha"
                 defaultValue={state.password}
                 error={state.errors?.password}
             />

@@ -18,9 +18,9 @@ export function TextInput({label, type = 'text', name, disabled = false, classNa
                 name={name}
                 formNoValidate
                 className={cn(
-                    "block w-full rounded-md bg-white px-3 py-1.5 font-normal text-principal outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-fy sm:text-sm/6 border-2 border-transparent disabled:opacity-50 disabled:cursor-not-allowed",
+                    "block w-full rounded-md bg-white px-3 py-1.5 font-normal text-principal ring-2 ring-inset ring-principal placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-fy sm:text-sm/6 disabled:opacity-50 disabled:cursor-not-allowed",
                     {
-                        "border-red-500": !!error,
+                        "ring-red-500 focus:ring-red-500": !!error,
                     }
                 )}
                 disabled={disabled}

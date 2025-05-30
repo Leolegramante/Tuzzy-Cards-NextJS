@@ -88,7 +88,7 @@ export const EditUserModal = ({isOpen, onCloseAction, user}: EditUserModalModalP
                 <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
                     <DialogPanel
                         transition
-                        className="data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in data-closed:sm:translate-y-0 data-closed:sm:scale-95 relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
+                        className="my-auto data-closed:translate-y-4 data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in data-closed:sm:translate-y-0 data-closed:sm:scale-95 relative transform overflow-hidden rounded-lg bg-white px-4 pb-4 pt-5 text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:p-6"
                     >
                         <div className="absolute right-0 top-0 hidden pr-4 pt-4 sm:block">
                             <button
@@ -101,7 +101,7 @@ export const EditUserModal = ({isOpen, onCloseAction, user}: EditUserModalModalP
                             </button>
                         </div>
                         <form action={formAction} noValidate>
-                            <div className="flex gap-x-2 space-y-4 mt-6">
+                            <div className="gird grid-cols-1 lg:flex gap-x-2 mt-6">
                                 <TextInput
                                     label="Nome"
                                     name="firstName"
@@ -117,14 +117,14 @@ export const EditUserModal = ({isOpen, onCloseAction, user}: EditUserModalModalP
                                     defaultValue={user.lastName}
                                 />
                             </div>
-                            <div className="flex gap-x-2 space-y-4 mt-6">
+                            <div className="gird grid-cols-1 lg:flex items-start gap-x-2  mt-6">
                                 <EmailInput
                                     label="Email"
                                     name="email"
-                                    className="w-full"
+                                    className="w-full "
                                     defaultValue={user.email}
                                 />
-                                <div className='text-principal text-sm font-semibold w-full mt-2'>
+                                <div className='text-principal items-start text-sm font-semibold w-full mt-2'>
                                     <label htmlFor='role'>Role</label>
                                     <Select
                                         id='role'

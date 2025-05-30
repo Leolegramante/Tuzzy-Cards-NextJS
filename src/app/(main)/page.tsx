@@ -12,10 +12,10 @@ export default function Home() {
             <PageContainer className='min-h-0 background-pattern max-w-screen px-0 lg:px-0 py-0 pt-4'>
                 <Carousel images={images}/>
             </PageContainer>
-            <PageContainer className='min-h-0 max-w-screen px-0 lg:px-0 py-0 pt-4'>
+            <PageContainer className='min-h-0 w-full max-w-screen px-0 lg:px-0 py-0 pt-4'>
                 <LatestProducts/>
             </PageContainer>
-            <PageContainer className='min-h-0 background-main-page-categories max-w-screen px-0 lg:px-0 py-0 pt-4'>
+            <PageContainer className='min-h-0 w-full max-w-screen background-main-page-categories max-w-screen px-0 lg:px-0 py-0 pt-4'>
                 <CategoryList/>
             </PageContainer>
         </>
