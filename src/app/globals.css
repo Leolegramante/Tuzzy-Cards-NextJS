@@ -20,6 +20,13 @@
     background-repeat: no-repeat;
 }
 
+.background-pattern-pokeball {
+    background-image: url('../../public/assets/pattern_vector_light.svg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: repeat-x;
+}
+
 .background-main-page-categories {
     background-image: url('../../public/assets/categories_bg.png');
     background-size: cover;

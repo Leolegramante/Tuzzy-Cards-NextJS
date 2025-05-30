@@ -2,13 +2,16 @@
 
 import {cn} from "@/helpers/cs";
 import Image, {StaticImageData} from "next/image";
+import Link from "next/link";
 import {useCallback, useEffect, useRef, useState} from 'react'
 import LeftNavigationTriangle from '../../../../public/assets/home-carousel-nav-left.png';
 import RightNavigationTriangle from '../../../../public/assets/home-carousel-nav-right.png';
 
-
 interface ImageCarouselProps {
-    images: StaticImageData[];
+    images: {
+        href: string;
+        image: StaticImageData;
+    }[]
 }
 
 export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
@@ -70,7 +73,7 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
     const sideSize = isMobile ? 150 : 388;
 
     return (
-        <div className="flex flex-col items-center space-y-4 overflow-hidden">
+        <div className="flex flex-col items-center space-y-4 overflow-hidden pt-6">
             <div className="flex items-center space-x-4">
                 <div className="flex space-x-2">
                     {prevIndices.map((idx, i) => (
@@ -78,16 +81,16 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                             key={`prev-${i}`}
                             onClick={goToPrev}
                             aria-label={`Imagem anterior ${i + 1}`}
-                            className="focus:outline-none cursor-pointer"
+                            className="focus:outline-none cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             <div className={'relative'} style={{width: `${sideSize}px`, height: `${sideSize}px`}}>
                                 <Image
-                                    src={images[idx].src}
+                                    src={images[idx].image}
                                     alt={`imagem ${i + 1}`}
                                     fill
                                     sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
                                     style={{objectFit: 'cover'}}
-                                    className="rounded-lg"
+                                    className="rounded-2xl transition-transform duration-500 ease-in-out"
                                     loading="lazy"
                                 />
                             </div>
@@ -95,16 +98,18 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                     ))}
                 </div>
 
-                <div className={'relative'} style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
-                    <Image
-                        src={images[activeIndex].src}
-                        alt={`imagem ${1}`}
-                        fill
-                        sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
-                        style={{objectFit: 'cover'}}
-                        className="rounded-lg"
-                        priority
-                    />
+                <div className='relative transform transition-all duration-300 ease-in-out hover:scale-105' style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
+                    <Link href={images[activeIndex].href} className="block">
+                        <Image
+                            src={images[activeIndex].image}
+                            alt={`imagem ${1}`}
+                            fill
+                            sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
+                            style={{objectFit: 'cover'}}
+                            className="rounded-2xl transition-transform duration-500 ease-in-out"
+                            priority
+                        />
+                    </Link>
                 </div>
 
                 <div className="flex space-x-2">
@@ -113,16 +118,16 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                             key={`next-${i}`}
                             onClick={goToNext}
                             aria-label={`Próxima imagem ${i + 1}`}
-                            className="focus:outline-none cursor-pointer"
+                            className="focus:outline-none cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
                         >
                             <div className={'relative'} style={{width: `${sideSize}px`, height: `${sideSize}px`}}>
                                 <Image
-                                    src={images[idx].src}
+                                    src={images[idx].image}
                                     alt={`imagem ${i + 1}`}
                                     fill
                                     sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
                                     style={{objectFit: 'cover'}}
-                                    className="rounded-lg"
+                                    className="rounded-2xl transition-transform duration-500 ease-in-out"
                                     loading="lazy"
                                 />
                             </div>
@@ -133,7 +138,7 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
 
             <div className='flex'>
                 <Image src={LeftNavigationTriangle} alt={''} height={40} className='h-10 w-auto'/>
-                <div className="flex items-center justify-between space-x-4 bg-white px-2">
+                <div className="flex items-center justify-between space-x-4 bg-white px-2 z-10">
                     <button
                         onClick={goToPrev}
                         aria-label="Anterior"
