@@ -43,3 +43,7 @@ next-env.d.ts
 
 # Webstorm IDE
 /.idea/
+
+# Não ignorar estes arquivos
+!tsconfig.json
+!next.config.ts

@@ -1,6 +1,7 @@
 'use server'
 
 import type {NextConfig} from "next";
+import path from 'path';
 
 const nextConfig: NextConfig = {
     images: {
@@ -10,6 +11,13 @@ const nextConfig: NextConfig = {
         serverActions: {
             bodySizeLimit: '10mb',
         },
+    },
+    webpack: (config) => {
+        config.resolve.alias = {
+            ...config.resolve.alias,
+            '@': path.resolve(__dirname, './src'),
+        };
+        return config;
     },
 };
 
