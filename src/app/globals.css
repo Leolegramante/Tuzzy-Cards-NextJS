@@ -1,0 +1,60 @@
+@import "tailwindcss";
+
+:root {
+    --background: #f9fafb;
+    --foreground: #171717;
+    --pricipal: rgb(0 31 79);
+    --font-yellow: #E1AF61;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+
+.background-pattern {
+    background-image: url('../../public/assets/background/PatternFront.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.background-main-page-categories {
+    background-image: url('../../public/assets/categories_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.background-main-page-categories-items {
+    background-image: url('../../public/assets/category_item_bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+@layer base {
+    input[type="number"]::-webkit-inner-spin-button,
+    input[type="number"]::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+@theme {
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
+    --color-principal: var(--pricipal);
+    --color-fy: var(--font-yellow);
+}
+
+body {
+    /*background-image: url('../../public/assets/background/PatternFront.png');*/
+    /*background-size: cover;*/
+    /*background-position: center;*/
+    /*background-repeat: no-repeat;*/
+    /*background-attachment: fixed;*/
+    background-color: var(--background);
+    color: var(--font-yellow);
+    font-family: Roboto, sans-serif;
+    overflow-x: hidden;
+}
