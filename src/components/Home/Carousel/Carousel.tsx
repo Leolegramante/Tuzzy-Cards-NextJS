@@ -1,6 +1,7 @@
 'use client'
 
 import {cn} from "@/helpers/cs";
+import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
 import Image, {StaticImageData} from "next/image";
 import Link from "next/link";
 import {useCallback, useEffect, useRef, useState} from 'react'
@@ -98,7 +99,8 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                     ))}
                 </div>
 
-                <div className='relative transform transition-all duration-300 ease-in-out hover:scale-105' style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
+                <div className='relative transform transition-all duration-300 ease-in-out hover:scale-105'
+                     style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
                     <Link href={images[activeIndex].href} className="block">
                         <Image
                             src={images[activeIndex].image}
@@ -144,7 +146,7 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                         aria-label="Anterior"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        ◀
+                        <ChevronLeftIcon className='text-fy' height={20}/>
                     </button>
 
                     <div className="flex space-x-2 justify-between items-center">
@@ -166,7 +168,7 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                         aria-label="Próxima"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        ▶
+                        <ChevronRightIcon className='text-fy' height={20}/>
                     </button>
                 </div>
                 <Image src={RightNavigationTriangle} alt={''} height={40} className='h-10 w-auto'/>

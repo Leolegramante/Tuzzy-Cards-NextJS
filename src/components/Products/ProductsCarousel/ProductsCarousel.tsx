@@ -3,6 +3,7 @@
 import {ProductCard} from "@/components/Products/ProductCard/ProductCard";
 import {ProductDto} from "@/helpers";
 import {cn} from "@/helpers/cs";
+import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import {useCallback, useEffect, useRef, useState} from "react";
 
 interface ProductsCarouselProps {
@@ -86,7 +87,7 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
                         aria-label="Anterior"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        ◀
+                        <ChevronLeftIcon className='text-fy' height={20}/>
                     </button>
 
                     <div className="flex space-x-2 justify-between items-center">
@@ -108,7 +109,7 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
                         aria-label="Próxima"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        ▶
+                        <ChevronRightIcon className='text-fy' height={20}/>
                     </button>
                 </div>
             </div>
