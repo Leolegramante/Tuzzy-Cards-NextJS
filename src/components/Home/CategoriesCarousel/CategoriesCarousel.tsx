@@ -9,15 +9,13 @@ import buildAndBattleImage
     from "../../../../public/assets/products-category/Destined Rivals - Build and Battle Tuzzy Cards.png";
 import etbImage
     from "../../../../public/assets/products-category/Destined Rivals - Elite Trainer Box 01 Tuzzy Cards.png";
-import singleBoosterImage
-    from '../../../../public/assets/products-category/Kit - Blister Unitário EV10 Pokémon TCG Rivais Predestinados Tuzzy Cards.png';
-import boosterBundleImage
-    from "../../../../public/assets/products-category/Kit - Mini Booster Box 2x EV10 Pokémon TCG Rivais Predestinados Tuzzy Cards.png";
-import quadPackImage
-    from "../../../../public/assets/products-category/Kit - Pacote Quádruplo EV10 Pokémon TCG Rivais Predestinados Tuzzy Cards.png";
 import tinImage from "../../../../public/assets/products-category/Mini Tin.png";
+import boosterBundleImage from "../../../../public/assets/products-category/miniBoosterBox.png";
 
 import pokemonLogoImage from "../../../../public/assets/products-category/pokemon-log.png";
+import quadPackImage from "../../../../public/assets/products-category/quadpack.png";
+import singleBoosterImage from '../../../../public/assets/products-category/singlePack.png';
+import triplePackImage from "../../../../public/assets/products-category/triplepack.png";
 
 const categoriesNavigation = [
     {
@@ -38,7 +36,7 @@ const categoriesNavigation = [
     {
         name: "Blister Triplo",
         href: "/products?categoryIds=4,6",
-        image: quadPackImage,
+        image: triplePackImage,
     },
     {
         name: "Blister Quadruplo",
