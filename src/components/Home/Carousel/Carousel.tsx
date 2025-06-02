@@ -1,23 +1,26 @@
 'use client'
 
-import {cn} from "@/helpers/cs";
-import {ChevronLeftIcon, ChevronRightIcon} from '@heroicons/react/24/solid'
+import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import Image, {StaticImageData} from "next/image";
-import Link from "next/link";
-import {useCallback, useEffect, useRef, useState} from 'react'
+import React, {useCallback, useEffect, useState} from 'react';
 import LeftNavigationTriangle from '../../../../public/assets/home-carousel-nav-left.png';
 import RightNavigationTriangle from '../../../../public/assets/home-carousel-nav-right.png';
 
-interface ImageCarouselProps {
+interface CarouselProps {
     images: {
         href: string;
         image: StaticImageData;
     }[]
 }
 
-export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
-    const [activeIndex, setActiveIndex] = useState(0);
-    const intervalRef = useRef<NodeJS.Timeout | null>(null);
+export function Carousel({images}: CarouselProps) {
+
+    // Create infinite array by duplicating items
+    const extendedItems = [...images, ...images, ...images];
+    const [currentIndex, setCurrentIndex] = useState(images.length); // Start at the middle set
+    const [isTransitioning, setIsTransitioning] = useState(false);
+
+    const [autoPlayKey, setAutoPlayKey] = useState(0);
     const [isMobile, setIsMobile] = useState(false);
 
     useEffect(() => {
@@ -31,118 +34,137 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
-    const numSideImages = isMobile ? 1 : 2;
-
-    const prevIndices = Array.from({length: numSideImages}, (_, i) =>
-        (activeIndex - (numSideImages - i) + images.length) % images.length
-    );
-
-    const nextIndices = Array.from({length: numSideImages}, (_, i) =>
-        (activeIndex + i + 1) % images.length
-    );
-
-    const resetInterval = useCallback(() => {
-        if (intervalRef.current) clearInterval(intervalRef.current);
-        intervalRef.current = setInterval(() => {
-            setActiveIndex((prev) => (prev + 1) % images.length);
-        }, 5000);
-    }, [images.length]);
-
-    const goToNext = useCallback(() => {
-        setActiveIndex((prev) => (prev + 1) % images.length);
-        resetInterval();
-    }, [images.length, resetInterval]);
-
-    const goToPrev = useCallback(() => {
-        setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
-        resetInterval();
-    }, [images.length, resetInterval]);
-
-    const goToIndex = (index: number) => {
-        setActiveIndex(index);
-        resetInterval();
-    };
-
-    useEffect(() => {
-        resetInterval();
-        return () => {
-            if (intervalRef.current) clearInterval(intervalRef.current);
-        };
-    }, [resetInterval]);
-
     const mainSize = isMobile ? 250 : 512;
     const sideSize = isMobile ? 150 : 388;
 
+    const handleNext = useCallback(() => {
+        if (isTransitioning) return;
+
+        setIsTransitioning(true);
+        setCurrentIndex(prev => prev + 1);
+        setAutoPlayKey(prev => prev + 1); // Reset auto-play timer
+    }, [isTransitioning]);
+
+    // Auto-slide functionality
+    useEffect(() => {
+        const interval = setInterval(() => {
+            handleNext();
+        }, 4000);
+
+        return () => clearInterval(interval);
+    }, [autoPlayKey, handleNext]);
+
+    const handlePrev = () => {
+        if (isTransitioning) return;
+
+        setIsTransitioning(true);
+        setCurrentIndex(prev => prev - 1);
+        setAutoPlayKey(prev => prev + 1);
+    };
+
+    // Handle infinite loop reset
+    useEffect(() => {
+        if (currentIndex >= images.length * 2) {
+            setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(images.length);
+            }, 500);
+        } else if (currentIndex < images.length) {
+            setTimeout(() => {
+                setIsTransitioning(false);
+                setCurrentIndex(images.length * 2 - 1);
+            }, 500);
+        } else {
+            setTimeout(() => {
+                setIsTransitioning(false);
+            }, 500);
+        }
+    }, [currentIndex, images.length]);
+
+    const gap = 16; // 16px de espaçamento
+
+    const getCardStyle = (index: number) => {
+        const position = index - currentIndex;
+
+        // Calcula o deslocamento acumulando os tamanhos dos cards anteriores + gap
+        let offset = 0;
+        if (position > 0) {
+            // Indo para a direita
+            offset = mainSize / 2 + gap / 2 + (position - 1) * (sideSize + gap) + sideSize / 2 + gap / 2;
+        } else if (position < 0) {
+            // Indo para a esquerda
+            offset = -(mainSize / 2 + gap / 2 + (Math.abs(position) - 1) * (sideSize + gap) + sideSize / 2 + gap / 2);
+        }
+
+        let scale = '';
+        let opacity = '';
+        let zIndex = '';
+
+        switch (position) {
+            case 0:
+                scale = 'scale(1)';
+                opacity = 'opacity-100';
+                zIndex = 'z-30';
+                break;
+            case -1:
+            case 1:
+                zIndex = 'z-20';
+                break;
+            case -2:
+            case 2:
+                zIndex = 'z-10';
+                break;
+            default:
+                opacity = 'opacity-0';
+                zIndex = 'z-0';
+        }
+
+        return {
+            transform: `translateX(${offset}px) ${scale}`,
+            transition: isTransitioning ? 'all 0.5s cubic-bezier(0.4, 0.0, 0.2, 1)' : 'none',
+            className: `${opacity} ${zIndex}`
+        };
+    };
+
     return (
-        <div className="flex flex-col items-center space-y-4 overflow-hidden pt-6">
-            <div className="flex items-center space-x-4">
-                <div className="flex space-x-2">
-                    {prevIndices.map((idx, i) => (
-                        <button
-                            key={`prev-${i}`}
-                            onClick={goToPrev}
-                            aria-label={`Imagem anterior ${i + 1}`}
-                            className="focus:outline-none cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
-                        >
-                            <div className={'relative'} style={{width: `${sideSize}px`, height: `${sideSize}px`}}>
-                                <Image
-                                    src={images[idx].image}
-                                    alt={`imagem ${i + 1}`}
-                                    fill
-                                    sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
-                                    style={{objectFit: 'cover'}}
-                                    className="rounded-2xl transition-transform duration-500 ease-in-out"
-                                    loading="lazy"
-                                />
-                            </div>
-                        </button>
-                    ))}
-                </div>
+        <div className="flex flex-col items-center space-y-4 overflow-hidden pt-4 w-full">
+            {/* Carousel Container */}
+            <div className="relative flex w-full h-[250px] md:h-[512px] items-center justify-center overflow-hidden">
+                {extendedItems.map((item, index) => {
+                    const style = getCardStyle(index);
 
-                <div className='relative transform transition-all duration-300 ease-in-out hover:scale-105'
-                     style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
-                    <Link href={images[activeIndex].href} className="block">
-                        <Image
-                            src={images[activeIndex].image}
-                            alt={`imagem ${1}`}
-                            fill
-                            sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
-                            style={{objectFit: 'cover'}}
-                            className="rounded-2xl transition-transform duration-500 ease-in-out"
-                            priority
-                        />
-                    </Link>
-                </div>
-
-                <div className="flex space-x-2">
-                    {nextIndices.map((idx, i) => (
-                        <button
-                            key={`next-${i}`}
-                            onClick={goToNext}
-                            aria-label={`Próxima imagem ${i + 1}`}
-                            className="focus:outline-none cursor-pointer transform transition-all duration-300 ease-in-out hover:scale-105"
+                    return (
+                        <div
+                            key={`${item.href}-${index}`}
+                            className={`absolute rounded-xl  ${style.className}`}
+                            style={{
+                                transform: style.transform,
+                                transition: style.transition,
+                                width: `${currentIndex === index ? mainSize : sideSize}px`,
+                                height: `${currentIndex === index ? mainSize : sideSize}px`,
+                                marginLeft: gap / 2,
+                                marginRight: gap / 2,
+                            }}
                         >
-                            <div className={'relative'} style={{width: `${sideSize}px`, height: `${sideSize}px`}}>
-                                <Image
-                                    src={images[idx].image}
-                                    alt={`imagem ${i + 1}`}
-                                    fill
-                                    sizes={`(max-width: 640px) ${sideSize}px, ${sideSize}px`}
-                                    style={{objectFit: 'cover'}}
-                                    className="rounded-2xl transition-transform duration-500 ease-in-out"
-                                    loading="lazy"
-                                />
-                            </div>
-                        </button>
-                    ))}
-                </div>
+                            <Image
+                                src={item.image}
+                                alt={`imagem ${index + 1}`}
+                                fill
+                                sizes={`(max-width: 640px) ${currentIndex === index ? mainSize : sideSize}px, ${currentIndex === index ? mainSize : sideSize}px`}
+                                style={{objectFit: 'cover'}}
+                                className="rounded-2xl transition-transform duration-500 ease-in-out hover:scale-105"
+                                loading="lazy"
+                            />
+                        </div>
+                    );
+                })}
             </div>
 
             <div className='flex'>
                 <Image src={LeftNavigationTriangle} alt={''} height={40} className='h-10 w-auto'/>
                 <div className="flex items-center justify-between space-x-4 bg-white px-2 z-10">
                     <button
-                        onClick={goToPrev}
+                        onClick={handlePrev}
                         aria-label="Anterior"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
@@ -153,18 +175,25 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                         {images.map((_, index) => (
                             <button
                                 key={index}
-                                onClick={() => goToIndex(index)}
+                                onClick={() => {
+                                    if (!isTransitioning) {
+                                        setIsTransitioning(true);
+                                        setCurrentIndex(images.length + index);
+                                        setAutoPlayKey(prev => prev + 1);
+                                    }
+                                }}
                                 aria-label={`Ir para imagem ${index + 1}`}
-                                className={cn(
-                                    'w-3 h-3 rounded-full transition',
-                                    index === activeIndex ? 'bg-principal' : 'bg-gray-300'
-                                )}
+                                className={`w-3 h-3 rounded-full transition-all duration-200 ${
+                                    (currentIndex % images.length) === index
+                                        ? 'bg-principal scale-110'
+                                        : 'bg-gray-300 hover:bg-gray-400'
+                                }`}
                             />
                         ))}
                     </div>
 
                     <button
-                        onClick={goToNext}
+                        onClick={handleNext}
                         aria-label="Próxima"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
@@ -172,8 +201,7 @@ export const Carousel: React.FC<ImageCarouselProps> = ({images}) => {
                     </button>
                 </div>
                 <Image src={RightNavigationTriangle} alt={''} height={40} className='h-10 w-auto'/>
-
             </div>
         </div>
     );
-};
+}

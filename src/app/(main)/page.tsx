@@ -6,13 +6,19 @@ import bannerTerciario from '../../../public/assets/banner-3.png';
 import bgImage from '../../../public/assets/bg-spin.svg';
 
 export default function Home() {
-    const images = [{
-        href: 'https://sideboard.com.br/product/details/EXPERIENCIA-PREMIUM-RIVAIS',
-        image: bannerPrincipal
-    }, {href: 'https://sideboard.com.br/products?subCategoryIds=1', image: bannerSecundario}, {
-        href: 'https://www.youtube.com/@TuzzyCards',
-        image: bannerTerciario
-    }];
+    const images = [
+        {
+            href: 'https://sideboard.com.br/product/details/EXPERIENCIA-PREMIUM-RIVAIS',
+            image: bannerPrincipal
+        },
+        {
+            href: 'https://sideboard.com.br/products?subCategoryIds=1', image: bannerSecundario
+        },
+        {
+            href: 'https://www.youtube.com/@TuzzyCards',
+            image: bannerTerciario
+        }
+    ];
     return (
         <>
             <PageContainer className='min-h-0 max-w-screen px-0 lg:px-0 py-0 background-pattern-pokeball '>
