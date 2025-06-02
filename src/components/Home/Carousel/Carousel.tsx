@@ -129,7 +129,7 @@ export function Carousel({images}: CarouselProps) {
     return (
         <div className="flex flex-col items-center space-y-4 overflow-hidden pt-4 w-full">
             {/* Carousel Container */}
-            <div className="relative flex w-full h-[250px] md:h-[512px] items-center justify-center overflow-hidden">
+            <div className="relative flex w-full h-[280px] md:h-[542px] items-center justify-center overflow-hidden">
                 {extendedItems.map((item, index) => {
                     const style = getCardStyle(index);
 
