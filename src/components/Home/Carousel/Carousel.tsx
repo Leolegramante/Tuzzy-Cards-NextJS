@@ -42,7 +42,7 @@ export function Carousel({images}: CarouselProps) {
 
         setIsTransitioning(true);
         setCurrentIndex(prev => prev + 1);
-        setAutoPlayKey(prev => prev + 1); // Reset auto-play timer
+        setAutoPlayKey(prev => prev + 1);
     }, [isTransitioning]);
 
     // Auto-slide functionality
@@ -98,7 +98,7 @@ export function Carousel({images}: CarouselProps) {
 
         let scale = '';
         let opacity = '';
-        let zIndex = '';
+        let zIndex: string;
 
         switch (position) {
             case 0:
