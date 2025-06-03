@@ -1,11 +1,24 @@
 'use client'
 
 import CartModal from "@/components/Cart/Modals/CartModal";
+import {cn} from "@/helpers/cs";
 import {useCartStore} from "@/store/useCartStore";
-import {Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuItem, MenuItems} from "@headlessui/react";
+import {
+    Disclosure,
+    DisclosureButton,
+    DisclosurePanel,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuItems,
+    Popover,
+    PopoverButton,
+    PopoverPanel
+} from "@headlessui/react";
 import {UserCircleIcon} from "@heroicons/react/16/solid";
 import {MagnifyingGlassIcon, ShoppingCartIcon} from "@heroicons/react/20/solid";
 import {Bars3Icon, XMarkIcon} from "@heroicons/react/24/outline";
+import {ChevronDownIcon, ChevronUpIcon} from "@heroicons/react/24/solid";
 import Image from "next/image";
 import Link from "next/link";
 import Logo from '../../../public/assets/logo/Logo_Horizontal_Dourado.png'
@@ -23,8 +36,58 @@ export interface HeaderProps {
 }
 
 const navigation = [
-    {name: 'Todos os produtos', href: '/products', current: false},
-    // {name: 'Coleções', href: '#', current: false},
+    {
+        name: 'Pokémon', href: '/collections', current: false,
+        children: [
+            {name: 'Caixa de Booster', href: '/products?categoryIds=3,8'},
+            {name: 'Caixa Premium', href: '/products?categoryIds=15,16'},
+            {name: 'Coleção Treinador Avançado (ETB)', href: '/products?categoryIds=2,9'},
+            {name: 'Combo de Pacotes', href: '/products?categoryIds=10,11'},
+            {name: 'Blister Unitário', href: '/products?categoryIds=7'},
+            {name: 'Blister Triplo', href: '/products?categoryIds=4,6'},
+            {name: 'Blister Quádruplo', href: '/products?categoryIds=5'},
+            {name: 'Desafio Estratégico', href: '/products?categoryIds=12,13'},
+            {name: 'Experiência Premium', href: '/products?categoryIds=17'},
+            {name: 'Latas', href: '/products?categoryIds=14'},
+            {name: 'Todos os produtos', href: '/products?categoryIds=1'}
+        ],
+    },
+    {
+        name: 'Magic',
+        children: [
+            {name: 'Todos os produtos', href: '/products?categoryIds=18'}
+        ],
+    },
+    {
+        name: 'One Piece',
+        children: [
+            {name: 'Todos os produtos', href: '/products?categoryIds=19'}
+        ],
+    },
+    {
+        name: 'Lorcana',
+        children: [
+            {name: 'Todos os produtos', href: '/products?categoryIds=20'}
+        ],
+    },
+    {
+        name: 'Star Wars: Unlimited',
+        children: [
+            {name: 'Todos os produtos', href: '/products?categoryIds=21'}
+        ],
+    },
+    {
+        name: 'Altered',
+        children: [
+            {name: 'Todos os produtos', href: '/products?categoryIds=22'}
+        ],
+    },
+    {
+        name: 'Topps',
+        children: [
+            {name: 'Todos os produtos', href: '/products?categoryIds=23'}
+        ],
+    },
 ]
 
 const userNavigation = [
@@ -32,10 +95,6 @@ const userNavigation = [
     {name: 'Dashboard Administrativo', href: '/admin/dashboard', adminOnly: true},
     {name: 'Sair', href: '#', adminOnly: false},
 ]
-
-function classNames(...classes: unknown[]) {
-    return classes.filter(Boolean).join(' ')
-}
 
 export function Header({session, deleteSessionAction}: HeaderProps) {
     const {toggleCart} = useCartStore();
@@ -164,21 +223,52 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                     </div>
                     <nav aria-label="Global"
                          className="hidden lg:flex lg:space-x-8 lg:py-2 lg:items-center lg:justify-center">
-                        {navigation.map((item) =>
-                            (
-                                <a
-                                    key={item.name}
-                                    href={item.href}
-                                    aria-current={item.current ? 'page' : undefined}
-                                    className={classNames(
-                                        item.current ? 'text-fy border border-fy' : 'text-fy border border-transparent hover:border hover:border-fy',
-                                        'inline-flex items-center rounded-md px-3 py-2 text-sm font-medium',
+                        {navigation.map((nav) => {
+                            return (
+                                <Popover key={nav.name} className="relative">
+                                    {({open}) => (
+                                        <>
+                                            <PopoverButton
+                                                as="button"
+                                                className={cn(
+                                                    'flex items-center text-fy border border-transparent hover:border-fy rounded-md px-3 py-2 text-base font-medium focus:border-fy focus:outline-none',
+                                                    open && 'border-fy'
+                                                )}
+                                            >
+                                                {nav.name}
+                                                {open && (
+
+                                                    <ChevronUpIcon width={20} height={20} className='ml-1'/>
+                                                )}
+                                                {!open && (
+                                                    <ChevronDownIcon width={20} height={20} className='ml-1'/>
+                                                )}
+                                            </PopoverButton>
+                                            {nav.children && (
+                                                <PopoverPanel
+                                                    className="absolute z-50 mt-2 w-screen max-w-sm px-4 sm:px-0">
+                                                    <div
+                                                        className="overflow-hidden rounded-lg">
+                                                        <div
+                                                            className="relative grid gap-1 bg-white p-7 lg:grid-cols-1">
+                                                            {nav.children.map((child) => (
+                                                                <Link
+                                                                    key={child.name}
+                                                                    href={child.href}
+                                                                    className="p-2 text-base font-medium text-fy border border-transparent hover:border-b-principal hover:text-gray-900"
+                                                                >
+                                                                    {child.name}
+                                                                </Link>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                </PopoverPanel>
+                                            )}
+                                        </>
                                     )}
-                                >
-                                    {item.name}
-                                </a>
-                            )
-                        )}
+                                </Popover>
+                            );
+                        })}
                     </nav>
                 </div>
 
@@ -186,18 +276,41 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                 <DisclosurePanel as="nav" aria-label="Global" className="lg:hidden">
                     <div className="space-y-1 px-2 pt-2 pb-3">
                         {navigation.map((item) => (
-                            <DisclosureButton
-                                key={item.name}
-                                as="a"
-                                href={item.href}
-                                aria-current={item.current ? 'page' : undefined}
-                                className={classNames(
-                                    item.current ? 'bg-gray-100 text-fy' : 'text-fy hover:bg-gray-50',
-                                    'block rounded-md px-3 py-2 text-base font-medium',
+                            <Disclosure key={item.name} as="div" className="space-y-1">
+                                {({open}) => (
+                                    <>
+                                        <DisclosureButton
+                                            as="button"
+                                            className={cn(
+                                                'flex w-full items-center rounded-md px-3 py-2 text-base font-medium text-fy focus:outline-none',
+                                            )}
+                                        >
+                                            {item.name}
+                                            {item.children && (
+                                                open ? (
+                                                    <ChevronUpIcon width={20} height={20} className='ml-1'/>
+                                                ) : (
+                                                    <ChevronDownIcon width={20} height={20} className='ml-1'/>
+                                                )
+                                            )}
+                                        </DisclosureButton>
+                                        {item.children && (
+                                            <DisclosurePanel className="pl-4">
+                                                {item.children.map((child) => (
+                                                    <DisclosureButton
+                                                        key={child.name}
+                                                        as="a"
+                                                        href={child.href}
+                                                        className="block rounded-md px-3 py-2 text-base font-medium text-fy"
+                                                    >
+                                                        {child.name}
+                                                    </DisclosureButton>
+                                                ))}
+                                            </DisclosurePanel>
+                                        )}
+                                    </>
                                 )}
-                            >
-                                {item.name}
-                            </DisclosureButton>
+                            </Disclosure>
                         ))}
                     </div>
                     <div className="border-t border-gray-200 pt-4 pb-3">
@@ -258,6 +371,5 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
             </Disclosure>
             <CartModal/>
         </div>
-        // <MobileHeader role={session?.role ?? 'USER'} navigation={navigation} userNavigation={userNavigation}/>
     );
 }
