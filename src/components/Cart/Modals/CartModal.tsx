@@ -69,7 +69,7 @@ export default function CartModal() {
 
     return (
         <Transition show={isCartOpen} as={Fragment}>
-            <Dialog as="div" className="relative z-10" onClose={toggleCart}>
+            <Dialog as="div" className="relative z-50" onClose={toggleCart}>
                 <TransitionChild
                     as={Fragment}
                     enter="ease-in-out duration-300"

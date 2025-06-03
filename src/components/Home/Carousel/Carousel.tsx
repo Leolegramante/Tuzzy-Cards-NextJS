@@ -152,7 +152,7 @@ export function Carousel({images}: CarouselProps) {
                                 fill
                                 sizes={`(max-width: 640px) ${currentIndex === index ? mainSize : sideSize}px, ${currentIndex === index ? mainSize : sideSize}px`}
                                 style={{objectFit: 'cover'}}
-                                className="rounded-2xl transition-transform duration-500 ease-in-out hover:scale-105"
+                                className="rounded-2xl transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer"
                                 loading="lazy"
                             />
                         </div>

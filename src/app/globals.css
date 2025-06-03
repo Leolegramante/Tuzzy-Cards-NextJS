@@ -13,6 +13,13 @@
     display: none;
 }
 
+.background-abstract {
+    background-image: url('../../public/assets/background/abstract_Bg.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .background-pattern {
     background-image: url('../../public/assets/background/PatternFront.png');
     background-size: cover;

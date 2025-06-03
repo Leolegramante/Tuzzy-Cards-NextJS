@@ -99,7 +99,7 @@ const userNavigation = [
 export function Header({session, deleteSessionAction}: HeaderProps) {
     const {toggleCart} = useCartStore();
     return (
-        <div className='background-pattern'>
+        <div className='background-abstract'>
             <Disclosure as="header" className="shadow-sm">
                 <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-fy lg:px-8">
                     <div className="relative flex h-20 justify-between">
@@ -152,7 +152,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                             <button
                                 onClick={toggleCart}
                                 type="button"
-                                className="relative shrink-0 rounded-full bg-principal p-1 text-fy hover:text-gray-200 cursor-pointer"
+                                className="relative shrink-0 rounded-full p-1 text-fy hover:text-gray-200 cursor-pointer"
                             >
                                 <ShoppingCartIcon aria-hidden="true" className="size-6"/>
                             </button>
