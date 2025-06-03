@@ -21,10 +21,11 @@ export default function Home() {
     ];
     return (
         <>
-            <PageContainer className='min-h-0 max-w-screen px-0 lg:px-0 py-0 background-pattern-pokeball '>
+            <PageContainer
+                className='min-h-0 max-w-screen px-0 lg:px-0 py-0 background-pattern-pokeball border-2 border-transparent  border-y-fy'>
                 <div className='relative w-full overflow-hidden h-fit pt-4'>
                     <Image src={bgImage} alt='Background' height={500} width={500}
-                           className='absolute w-[700px] h-fit bottom-[2px] inset-x-0 mx-auto animate-rotateClockwise origin-center'/>
+                           className='absolute w-[1200px] h-fit   inset-0 m-auto animate-rotateClockwise origin-center'/>
                     <Carousel images={images}/>
                 </div>
             </PageContainer>

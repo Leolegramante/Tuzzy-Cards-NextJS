@@ -40,8 +40,8 @@ function classNames(...classes: unknown[]) {
 export function Header({session, deleteSessionAction}: HeaderProps) {
     const {toggleCart} = useCartStore();
     return (
-        <div>
-            <Disclosure as="header" className="bg-principal shadow-sm">
+        <div className='background-pattern'>
+            <Disclosure as="header" className="shadow-sm">
                 <div className="mx-auto max-w-7xl px-2 sm:px-4 lg:divide-y lg:divide-fy lg:px-8">
                     <div className="relative flex h-20 justify-between">
                         <div className="relative z-10 flex px-2 lg:px-0 my-2">

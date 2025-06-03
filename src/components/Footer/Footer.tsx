@@ -3,7 +3,7 @@ import {FaInstagram, FaYoutube} from "react-icons/fa";
 
 export function Footer() {
     return (
-        <div className='w-full bg-principal h-auto'>
+        <div className='w-full background-pattern h-auto'>
             <div
                 className="flex flex-col md:flex-row items-center justify-between mx-auto max-w-7xl min-h-20 p-6 lg:px-8">
                 <div className="flex gap-4 w-full justify-evenly">
