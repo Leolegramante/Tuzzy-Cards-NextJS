@@ -11,16 +11,12 @@ import bgImage from '../../../public/assets/bg-spin.svg';
 export default function Home() {
     const images = [
         {
-            href: 'https://sideboard.com.br/product/details/EXPERIENCIA-PREMIUM-RIVAIS',
-            image: expPremiumBanner
-        },
-        {
-            href: 'https://sideboard.com.br/products?subCategoryIds=1',
-            image: engProductsBanner
-        },
-        {
             href: 'https://www.youtube.com/@TuzzyCards',
             image: youtubeBanner
+        },
+        {
+            href: 'https://sideboard.com.br/product/details/EXPERIENCIA-PREMIUM-RIVAIS',
+            image: expPremiumBanner
         },
         {
             href: 'https://sideboard.com.br/products?categoryIds=20',
@@ -29,6 +25,10 @@ export default function Home() {
         {
             href: 'https://sideboard.com.br/products?categoryIds=21',
             image: startWarsBanner
+        },
+        {
+            href: 'https://sideboard.com.br/products?subCategoryIds=1',
+            image: engProductsBanner
         },
         {
             href: 'https://sideboard.com.br/products?categoryIds=22',
