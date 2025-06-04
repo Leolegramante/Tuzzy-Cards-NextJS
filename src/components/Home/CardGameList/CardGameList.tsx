@@ -98,7 +98,7 @@ export function CardGameList() {
                         >
                             <Link
                                 href={cardGame.href}
-                                className="flex flex-col justify-center items-center w-36 h-28 bg-white rounded-lg shadow-md hover:shadow-lg hover:scale-110 transition-shadow duration-300 px-2"
+                                className="flex flex-col justify-center items-center w-36 h-28 bg-white rounded-lg shadow-md hover:shadow-2xl hover:scale-110 transition-all duration-1000 px-2"
                             >
                                 <Image
                                     src={cardGame.image}
@@ -109,7 +109,7 @@ export function CardGameList() {
                                     blurDataURL={cardGame.image.src}
                                 />
                             </Link>
-                            <p className="text-principal font-semibold text-md text-center">
+                            <p className="text-principal font-semibold text-md text-center mt-2">
                                 {cardGame.name}
                             </p>
                         </div>

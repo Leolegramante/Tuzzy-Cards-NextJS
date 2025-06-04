@@ -45,7 +45,7 @@
     background-image: url('../../public/assets/categories_bg.png');
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
 }
 
 .background-main-page-categories-items {

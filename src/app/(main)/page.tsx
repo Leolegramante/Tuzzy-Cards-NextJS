@@ -28,7 +28,7 @@ export default function Home() {
     return (
         <>
             <PageContainer
-                className='min-h-0 max-w-screen px-0 lg:px-0 py-0 background-pattern-pokeball border-2 border-transparent  border-y-fy'>
+                className='min-h-0 max-w-screen px-0 lg:px-0 py-0 background-diagonal border-2 border-transparent  border-y-fy'>
                 <div className='relative w-full overflow-hidden h-fit pt-4'>
                     <Image src={bgImage} alt='Background' height={500} width={500}
                            className='absolute w-[1200px] h-fit   inset-0 m-auto animate-rotateClockwise origin-center'/>
@@ -36,7 +36,7 @@ export default function Home() {
                 </div>
             </PageContainer>
             <PageContainer
-                className='min-h-0 w-full max-w-screen overflow-hidden px-0 lg:px-0 py-0 pt-4 background-diagonal'>
+                className='min-h-0 w-full max-w-screen overflow-hidden px-0 lg:px-0 py-0 pt-4 background-main-page-categories'>
                 <LatestProducts/>
             </PageContainer>
             <PageContainer

@@ -50,7 +50,7 @@ export function ProductCard({product, mainSize}: { product: ProductDto, mainSize
                         weight: product.weight || 0,
                     })}
                     type='button'
-                    className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-principal px-8 py-2 text-sm font-medium text-fy hover:bg-fy hover:text-principal cursor-pointer"
+                    className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-principal px-8 py-2 text-sm font-medium text-gray-50 hover:bg-gray-50 hover:text-principal hover:border-principal cursor-pointer"
                 >
                     Adicionar ao carrinho<span className="sr-only">, {product.name}</span>
                 </button>
