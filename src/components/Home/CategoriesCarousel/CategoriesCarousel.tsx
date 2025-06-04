@@ -12,17 +12,11 @@ import etbImage
 import tinImage from "../../../../public/assets/products-category/Mini Tin.png";
 import boosterBundleImage from "../../../../public/assets/products-category/miniBoosterBox.png";
 
-import pokemonLogoImage from "../../../../public/assets/products-category/pokemon-log.png";
 import quadPackImage from "../../../../public/assets/products-category/quadpack.png";
 import singleBoosterImage from '../../../../public/assets/products-category/singlePack.png';
 import triplePackImage from "../../../../public/assets/products-category/triplepack.png";
 
 const categoriesNavigation = [
-    {
-        name: "Pokémon",
-        href: "/products?categoryIds=1",
-        image: pokemonLogoImage,
-    },
     {
         name: "Booster Box",
         href: "/products?categoryIds=3,8",
@@ -95,7 +89,7 @@ export function CategoriesCarousel() {
     };
 
     return (
-        <div className="flex flex-col items-center w-full py-6 mx-auto divide-y divide-principal gap-4">
+        <div className="flex flex-col items-center w-full py-6 mx-auto gap-4">
             <div className="w-full">
                 <h3 className="font-semibold text-xl text-principal text-center">
                     Busque por categoria

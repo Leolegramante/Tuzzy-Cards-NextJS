@@ -135,13 +135,13 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                             <button
                                 onClick={toggleCart}
                                 type="button"
-                                className="relative shrink-0 rounded-full bg-principal p-1 text-fy"
+                                className="relative shrink-0 rounded-full p-1 text-gray-50"
                             >
                                 <ShoppingCartIcon aria-hidden="true" className="size-6"/>
                             </button>
                             {/* Mobile menu button */}
                             <DisclosureButton
-                                className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500">
+                                className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-50">
                                 <span className="absolute -inset-0.5"/>
                                 <span className="sr-only">Open menu</span>
                                 <Bars3Icon aria-hidden="true" className="block size-6 group-data-open:hidden"/>
@@ -152,7 +152,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                             <button
                                 onClick={toggleCart}
                                 type="button"
-                                className="relative shrink-0 rounded-full p-1 text-fy hover:text-gray-200 cursor-pointer"
+                                className="relative shrink-0 rounded-full p-1 text-gray-50 hover:text-gray-200 cursor-pointer"
                             >
                                 <ShoppingCartIcon aria-hidden="true" className="size-6"/>
                             </button>
@@ -160,10 +160,10 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                             {session === undefined && (
                                 <div className='flex items-center justify-center p-2 gap-2'>
                                     <Link href="/auth/sign-in"
-                                          className="border border-transparent hover:border-b-fy cursor-pointer">Entrar</Link>
-                                    <p>|</p>
+                                          className="border border-transparent text-gray-50 hover:border-b-gray-50 cursor-pointer">Entrar</Link>
+                                    <p className='text-gray-50'>|</p>
                                     <Link href="/auth/sign-up"
-                                          className="border border-transparent hover:border-b-fy cursor-pointer">Cadastrar-se</Link>
+                                          className="border border-transparent text-gray-50 hover:border-b-gray-50 cursor-pointer">Cadastrar-se</Link>
                                 </div>
                             )}
 
@@ -231,7 +231,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                             <PopoverButton
                                                 as="button"
                                                 className={cn(
-                                                    'flex items-center text-fy border border-transparent hover:border-fy rounded-md px-3 py-2 text-base font-medium focus:border-fy focus:outline-none',
+                                                    'flex items-center text-gray-50 border border-transparent hover:border-fy rounded-md px-3 py-2 text-base font-medium focus:border-fy focus:outline-none',
                                                     open && 'border-fy'
                                                 )}
                                             >
@@ -255,7 +255,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                                                 <Link
                                                                     key={child.name}
                                                                     href={child.href}
-                                                                    className="p-2 text-base font-medium text-fy border border-transparent hover:border-b-principal hover:text-gray-900"
+                                                                    className="p-2 text-base font-medium text-principal border border-transparent hover:border-b-principal hover:text-gray-900"
                                                                 >
                                                                     {child.name}
                                                                 </Link>
@@ -282,7 +282,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                         <DisclosureButton
                                             as="button"
                                             className={cn(
-                                                'flex w-full items-center rounded-md px-3 py-2 text-base font-medium text-fy focus:outline-none',
+                                                'flex w-full items-center rounded-md px-3 py-2 text-base font-medium text-text-gray-50 focus:outline-none',
                                             )}
                                         >
                                             {item.name}
@@ -301,7 +301,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                                         key={child.name}
                                                         as="a"
                                                         href={child.href}
-                                                        className="block rounded-md px-3 py-2 text-base font-medium text-fy"
+                                                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-50"
                                                     >
                                                         {child.name}
                                                     </DisclosureButton>
@@ -319,14 +319,14 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                 <DisclosureButton
                                     as="a"
                                     href="/auth/sign-in"
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-fy hover:bg-gray-50"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-50 hover:bg-gray-50"
                                 >
                                     Entrar
                                 </DisclosureButton>
                                 <DisclosureButton
                                     as="a"
                                     href="/auth/sign-up"
-                                    className="block rounded-md px-3 py-2 text-base font-medium text-fy hover:bg-gray-50"
+                                    className="block rounded-md px-3 py-2 text-base font-medium text-gray-50 hover:bg-gray-50"
                                 >
                                     Cadastrar-se
                                 </DisclosureButton>
@@ -345,7 +345,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                             <button
                                                 key={item.name}
                                                 type="button"
-                                                className="block rounded-md px-3 py-2 text-base font-medium text-fy hover:bg-gray-50"
+                                                className="block rounded-md px-3 py-2 text-base font-medium text-gray-50 hover:bg-gray-50"
                                                 onClick={() => deleteSessionAction()}
                                             >
                                                 {item.name}
@@ -357,7 +357,7 @@ export function Header({session, deleteSessionAction}: HeaderProps) {
                                         <DisclosureButton key={item.name}
                                                           as="a"
                                                           href={item.href}
-                                                          className="block rounded-md px-3 py-2 text-base font-medium text-fy hover:bg-gray-50"
+                                                          className="block rounded-md px-3 py-2 text-base font-medium text-gray-50 hover:bg-gray-50"
                                         >
                                             {item.name}
                                         </DisclosureButton>

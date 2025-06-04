@@ -1,22 +1,28 @@
 import {Carousel, CategoryList, LatestProducts, PageContainer} from "@/components";
 import Image from "next/image";
-import bannerPrincipal from '../../../public/assets/banner-1.png';
-import bannerSecundario from '../../../public/assets/banner-2.png';
-import bannerTerciario from '../../../public/assets/banner-3.png';
+import expPremiumBanner from '../../../public/assets/banner-1.png';
+import engProductsBanner from '../../../public/assets/banner-2.png';
+import youtubeBanner from '../../../public/assets/banner-3.png';
+import lorcanaBanner from '../../../public/assets/banner-4.png';
 import bgImage from '../../../public/assets/bg-spin.svg';
 
 export default function Home() {
     const images = [
         {
             href: 'https://sideboard.com.br/product/details/EXPERIENCIA-PREMIUM-RIVAIS',
-            image: bannerPrincipal
+            image: expPremiumBanner
         },
         {
-            href: 'https://sideboard.com.br/products?subCategoryIds=1', image: bannerSecundario
+            href: 'https://sideboard.com.br/products?subCategoryIds=1',
+            image: engProductsBanner
         },
         {
             href: 'https://www.youtube.com/@TuzzyCards',
-            image: bannerTerciario
+            image: youtubeBanner
+        },
+        {
+            href: 'https://sideboard.com.br/products?subCategoryIds=20',
+            image: lorcanaBanner
         }
     ];
     return (
@@ -29,7 +35,8 @@ export default function Home() {
                     <Carousel images={images}/>
                 </div>
             </PageContainer>
-            <PageContainer className='min-h-0 w-full max-w-screen overflow-hidden px-0 lg:px-0 py-0 pt-4'>
+            <PageContainer
+                className='min-h-0 w-full max-w-screen overflow-hidden px-0 lg:px-0 py-0 pt-4 background-diagonal'>
                 <LatestProducts/>
             </PageContainer>
             <PageContainer

@@ -20,6 +20,13 @@
     background-repeat: no-repeat;
 }
 
+.background-diagonal {
+    background-image: url('../../public/assets/background/pattern-diagonal.png');
+    background-size: auto;
+    background-position: center;
+    background-repeat: repeat;
+}
+
 .background-pattern {
     background-image: url('../../public/assets/background/PatternFront.png');
     background-size: cover;

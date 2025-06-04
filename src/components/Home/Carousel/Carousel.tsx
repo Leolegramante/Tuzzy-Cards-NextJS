@@ -2,6 +2,7 @@
 
 import {ChevronLeftIcon, ChevronRightIcon} from "@heroicons/react/24/solid";
 import Image, {StaticImageData} from "next/image";
+import Link from "next/link";
 import React, {useCallback, useEffect, useState} from 'react';
 import LeftNavigationTriangle from '../../../../public/assets/home-carousel-nav-left.png';
 import RightNavigationTriangle from '../../../../public/assets/home-carousel-nav-right.png';
@@ -146,15 +147,18 @@ export function Carousel({images}: CarouselProps) {
                                 marginRight: gap / 2,
                             }}
                         >
-                            <Image
-                                src={item.image}
-                                alt={`imagem ${index + 1}`}
-                                fill
-                                sizes={`(max-width: 640px) ${currentIndex === index ? mainSize : sideSize}px, ${currentIndex === index ? mainSize : sideSize}px`}
-                                style={{objectFit: 'cover'}}
-                                className="rounded-2xl transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer"
-                                loading="lazy"
-                            />
+                            <Link href={item.href}>
+                                <Image
+                                    src={item.image}
+                                    alt={`imagem ${index + 1}`}
+                                    fill
+                                    sizes={`(max-width: 640px) ${currentIndex === index ? mainSize : sideSize}px, ${currentIndex === index ? mainSize : sideSize}px`}
+                                    style={{objectFit: 'cover'}}
+                                    className="rounded-2xl transition-transform duration-500 ease-in-out hover:scale-105 cursor-pointer"
+                                    loading="lazy"
+                                />
+                            </Link>
+
                         </div>
                     );
                 })}
