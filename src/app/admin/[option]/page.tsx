@@ -22,7 +22,7 @@ const AdminDashboardPage = () => {
     const currentPage = Number(page) || 1;
     const searchLimit = Number(limit) || 10;
 
-    const [active, setActive] = useState<activeComponent>({itemName: 'home', subItemName: null})
+    const [active, setActive] = useState<activeComponent>({itemName: option, subItemName: null})
     return (<>
         <div className="w-full h-full px-4 py-2 bg-gray-100 min-h-[900px]">
             <div className='pl-2 flex flex-col gap-y-2'>
