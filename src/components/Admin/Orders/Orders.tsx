@@ -1,7 +1,7 @@
 'use client'
 
 import {FetchError, LoadingData} from "@/components";
-import {getOrders} from "@/components/Admin/Orders/actions.";
+import {getOrders} from "@/components/Admin/Orders/actions";
 import {OrderDetailsModal} from "@/components/Admin/Orders/modals/OrderDetailsModal";
 import {OrdersTable} from "@/components/Admin/Orders/OrdersTable";
 import {OrderDto} from "@/helpers";
