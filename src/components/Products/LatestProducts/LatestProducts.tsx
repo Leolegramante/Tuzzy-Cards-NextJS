@@ -42,7 +42,7 @@ export function LatestProducts() {
 
     return (
         <div className='flex flex-col items-center w-full pt-6 mx-auto divide-y divide-principal gap-4'>
-            <SectionTitle title='Novos prdutos' link='/products'
+            <SectionTitle title='Novos produtos' link='/products'
                           linkText='Veja todos os novos produtos'/>
             {loading && (
                 <LoadingData/>

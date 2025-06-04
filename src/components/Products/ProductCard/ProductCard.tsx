@@ -5,15 +5,19 @@ import {useCartStore} from "@/store/useCartStore";
 import Image from "next/image";
 import Link from "next/link";
 
-export function ProductCard({product, mainSize}: { product: ProductDto, mainSize: number }) {
+export function ProductCard({product, mainSize, classname = ''}: {
+    product: ProductDto,
+    mainSize: number,
+    classname?: string
+}) {
     const {addItem} = useCartStore();
 
     return (
         <div
-            className={`relative group flex flex-col items-center justify-center bg-white rounded-lg shadow-md`}
+            className={`relative group flex flex-col items-center justify-center bg-white rounded-lg shadow-md pt-2 ${classname}`}
             style={{width: `${mainSize}px`}}
         >
-            <Link href={`/product/details/${product.sku}`} className='cursor-pointer hover:'>
+            <Link href={`/product/details/${product.sku}`} className='cursor-pointer'>
                 <div className={'relative group-hover:opacity-90'}
                      style={{width: `${mainSize}px`, height: `${mainSize}px`}}>
                     <Image

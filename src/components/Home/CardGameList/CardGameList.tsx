@@ -98,7 +98,7 @@ export function CardGameList() {
                         >
                             <Link
                                 href={cardGame.href}
-                                className="flex flex-col justify-center items-center w-36 h-28 bg-white rounded-lg shadow-md hover:shadow-2xl hover:scale-110 transition-all duration-1000 px-2"
+                                className="flex flex-col justify-center items-center w-36 h-28 bg-white rounded-lg shadow-md hover:shadow-2xl hover:scale-110 transition-all duration-1000 px-2 ease-in-out"
                             >
                                 <Image
                                     src={cardGame.image}

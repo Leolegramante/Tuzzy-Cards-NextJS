@@ -134,16 +134,18 @@ const ProductDetailsPage = () => {
                                         </div>
                                     </div>
                                 ) : (
-                                    <div className="grid grid-cols-2 lg:gap-y-2">
+                                    <div className={`grid grid-cols-2 lg:gap-y-2`}>
                                         {product.backendImages?.map((image, index) => (
-                                            <Image
-                                                key={image.id}
-                                                alt={`Product Image ${index + 1}`}
-                                                src={image.url}
-                                                width={mainSize}
-                                                height={mainSize}
-                                                className={cn(productImages.length > 1 ? '' : 'col-span-2 row-span-2', 'rounded-lg')}
-                                            />
+                                            <div key={image.id}
+                                                 className={cn(productImages.length > 1 ? `h-[${mainSize}px] w-[${mainSize}px]` : 'col-span-2 row-span-2', 'flex items-center justify-center rounded-2xl')}>
+                                                <Image
+                                                    alt={`Product Image ${index + 1}`}
+                                                    src={image.url}
+                                                    width={mainSize}
+                                                    height={mainSize}
+                                                    className={`h-[${mainSize}px] w-[${mainSize}px] rounded-2xl`}
+                                                />
+                                            </div>
                                         ))}
                                     </div>
                                 )}

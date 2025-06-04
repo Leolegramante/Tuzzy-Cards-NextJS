@@ -58,24 +58,27 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
 
     return (
         <div className='max-w-screen'>
-            <div className='flex flex-col items-center space-y-4 overflow-hidden mt-3'>
+            <div className='flex flex-col items-center space-y-4 overflow-hidden pt-4 px-3'>
                 <div className='flex items-center space-x-4 '>
-                    <div className="flex space-x-2">
+                    <div className="flex space-x-4">
                         {prevIndices.map((idx, i) => (
                             <div key={`next-${i}`} className={'relative'} style={{width: `${mainSize}px`}}>
-                                <ProductCard product={products[idx]} mainSize={mainSize}/>
+                                <ProductCard product={products[idx]} mainSize={mainSize}
+                                             classname='hover:scale-105 transition-transform duration-1000 ease-in-out'/>
                             </div>
                         ))}
                     </div>
 
                     <div className='relative' style={{width: `${mainSize}px`}}>
-                        <ProductCard product={products[activeIndex]} mainSize={mainSize}/>
+                        <ProductCard product={products[activeIndex]} mainSize={mainSize}
+                                     classname='hover:scale-105 transition-transform duration-1000 ease-in-out'/>
                     </div>
 
                     <div className='flex space-x-4'>
                         {nextIndices.map((idx, i) => (
                             <div key={`next-${i}`} className={'relative'} style={{width: `${mainSize}px`}}>
-                                <ProductCard product={products[idx]} mainSize={mainSize}/>
+                                <ProductCard product={products[idx]} mainSize={mainSize}
+                                             classname='hover:scale-105 transition-transform duration-1000 ease-in-out'/>
                             </div>
                         ))}
                     </div>

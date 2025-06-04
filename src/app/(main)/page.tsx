@@ -4,6 +4,8 @@ import expPremiumBanner from '../../../public/assets/banner-1.png';
 import engProductsBanner from '../../../public/assets/banner-2.png';
 import youtubeBanner from '../../../public/assets/banner-3.png';
 import lorcanaBanner from '../../../public/assets/banner-4.png';
+import startWarsBanner from '../../../public/assets/banner-5.png';
+import alteredBanner from '../../../public/assets/banner-6.png';
 import bgImage from '../../../public/assets/bg-spin.svg';
 
 export default function Home() {
@@ -23,6 +25,14 @@ export default function Home() {
         {
             href: 'https://sideboard.com.br/products?categoryIds=20',
             image: lorcanaBanner
+        },
+        {
+            href: 'https://sideboard.com.br/products?categoryIds=21',
+            image: startWarsBanner
+        },
+        {
+            href: 'https://sideboard.com.br/products?categoryIds=22',
+            image: alteredBanner
         }
     ];
     return (
