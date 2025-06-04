@@ -81,13 +81,13 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
                     </div>
                 </div>
 
-                <div className="flex items-center justify-between space-x-4 bg-background rounded-t-lg px-2">
+                <div className="flex items-center justify-between space-x-4 bg-background rounded-lg px-2">
                     <button
                         onClick={goToPrev}
                         aria-label="Anterior"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        <ChevronLeftIcon className='text-fy' height={20}/>
+                        <ChevronLeftIcon className='text-principal' height={20}/>
                     </button>
 
                     <div className="flex space-x-2 justify-between items-center">
@@ -109,7 +109,7 @@ export function ProductsCarousel({products, isMobile}: ProductsCarouselProps) {
                         aria-label="Próxima"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        <ChevronRightIcon className='text-fy' height={20}/>
+                        <ChevronRightIcon className='text-principal' height={20}/>
                     </button>
                 </div>
             </div>

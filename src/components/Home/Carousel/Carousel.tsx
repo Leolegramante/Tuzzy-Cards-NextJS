@@ -172,7 +172,7 @@ export function Carousel({images}: CarouselProps) {
                         aria-label="Anterior"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        <ChevronLeftIcon className='text-fy' height={20}/>
+                        <ChevronLeftIcon className='text-principal' height={20}/>
                     </button>
 
                     <div className="flex space-x-2 justify-between items-center">
@@ -201,7 +201,7 @@ export function Carousel({images}: CarouselProps) {
                         aria-label="Próxima"
                         className="p-2 rounded-full transition cursor-pointer"
                     >
-                        <ChevronRightIcon className='text-fy' height={20}/>
+                        <ChevronRightIcon className='text-principal' height={20}/>
                     </button>
                 </div>
                 <Image src={RightNavigationTriangle} alt={''} height={40} className='h-10 w-auto'/>
