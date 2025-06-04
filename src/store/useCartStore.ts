@@ -29,6 +29,10 @@ export interface Product {
     price: number;
     image?: string;
     inStock: boolean;
+    width: number;
+    height: number;
+    depth: number;
+    weight: number;
 }
 
 export interface CartItem extends Product {
@@ -54,6 +58,7 @@ interface CartState {
     addShipment: (shipment: ShipmentItem) => void;
     updateStock: (id: number, inStock: boolean) => void;
     cleanCart: () => void;
+    getOrderVolume: () => number;
 }
 
 // Criação da store com persistência
@@ -66,6 +71,10 @@ export const useCartStore = create<CartState>()(
                 name: '',
                 price: 0,
                 inStock: true,
+                height: 0,
+                width: 0,
+                depth: 0,
+                weight: 0,
             },
             isCartOpen: false,
             toggleCart: () => set(state => ({isCartOpen: !state.isCartOpen})),
@@ -116,13 +125,18 @@ export const useCartStore = create<CartState>()(
             },
             cleanCart: () => {
                 set({items: [], shipment: {id: '', name: '', price: 0}});
+            },
+            getOrderVolume: () => {
+                const {items} = get();
+                return items.reduce((total, item) => {
+                    return total + (item.width * item.height * item.depth * item.quantity);
+                }, 0);
             }
         }),
         {
             name: 'cart', // Nome da chave no armazenamento
             storage: createJSONStorage(() => sessionStorage, {
                 reviver: (key, value) => {
-                    // Tente descriptografar apenas as strings
                     if (typeof value === 'string') {
                         const decryptedValue = decrypt(value);
                         if (decryptedValue) return JSON.parse(decryptedValue);
@@ -130,7 +144,6 @@ export const useCartStore = create<CartState>()(
                     return value;
                 },
                 replacer: (key, value) => {
-                    // Somente criptografe objetos do estado
                     if (typeof value === 'object') {
                         return encrypt(JSON.stringify(value));
                     }

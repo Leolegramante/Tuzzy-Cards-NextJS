@@ -163,7 +163,11 @@ const ProductDetailsPage = () => {
                                             image: product.backendImages ? product.backendImages[0].url : '',
                                             sku: product.sku,
                                             price: product?.priceInCents ? product.priceInCents : 0,
-                                            inStock: true
+                                            inStock: true,
+                                            width: product.width || 0,
+                                            height: product.height || 0,
+                                            depth: product.depth || 0,
+                                            weight: product.weight || 0,
                                         })}
                                         type='button'
                                         className='w-full h-14 bg-principal text-fy text-lg rounded-lg mt-4 hover:text-principal hover:bg-fy cursor-pointer'

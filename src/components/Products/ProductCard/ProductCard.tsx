@@ -43,7 +43,11 @@ export function ProductCard({product, mainSize}: { product: ProductDto, mainSize
                         sku: product.sku,
                         name: product.name,
                         image: product.backendImages ? product.backendImages[0].url : '',
-                        inStock: true
+                        inStock: true,
+                        width: product.width || 0,
+                        height: product.height || 0,
+                        depth: product.depth || 0,
+                        weight: product.weight || 0,
                     })}
                     type='button'
                     className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-principal px-8 py-2 text-sm font-medium text-fy hover:bg-fy hover:text-principal cursor-pointer"
