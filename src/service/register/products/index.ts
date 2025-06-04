@@ -164,7 +164,7 @@ export const RemoveImage = async (id: number): Promise<{ isValid: boolean }> => 
 export const EditProduct = async (data: ProductDto): Promise<EditProductResponseDto> => {
     const token = await getJWT()
     if (!token) return {isValid: false, message: 'Error'}
-
+    
     const response = await fetch(`${process.env.BASE_URL}/products/${data.id}`, {
         method: "PATCH",
         headers: {

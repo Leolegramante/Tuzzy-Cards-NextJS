@@ -20,7 +20,16 @@ export type CreateProductState = {
     categories: number[];
     subCategories: number[];
     description: string;
+    width: number
+    height: number;
+    depth: number;
+    weight: number;
 };
+
+const formatStringToNumber = (value: string): number => {
+    const formattedValue = value.replace(',', ""); // Remove non-numeric characters
+    return parseInt(formattedValue);
+}
 
 // Zod schema for validation
 const productSchema = z.object({
@@ -34,6 +43,10 @@ const productSchema = z.object({
         }),
     quantityInStock: z.string(),
     description: z.string(),
+    width: z.string(),
+    height: z.string(),
+    depth: z.string(),
+    weight: z.string(),
 });
 
 // Util function to encapsulate repeated logic
@@ -68,6 +81,10 @@ const mapFormDataToProductDto = (formData: FormData): ProductDto => ({
         .map(Number)
         .filter((value) => !isNaN(value) && value !== 0),
     description: formData.get("description") as string,
+    width: formData.get('width') ? formatStringToNumber(formData.get('width') as string) : 0,
+    height: formData.get('height') ? formatStringToNumber(formData.get('height') as string) : 0,
+    depth: formData.get('depth') ? formatStringToNumber(formData.get('depth') as string) : 0,
+    weight: formData.get('weight') ? formatStringToNumber(formData.get('weight') as string) : 0,
 });
 
 const createProductError = (message: string): ProductError => ({

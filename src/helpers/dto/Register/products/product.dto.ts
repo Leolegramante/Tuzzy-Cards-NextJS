@@ -14,6 +14,10 @@ export type ProductDto = {
     productCategories?: { id: number, name: string }[];
     productSubCategories?: { id: number, name: string }[];
     backendImages?: Image[],
+    width?: number;
+    height?: number;
+    depth?: number;
+    weight?: number;
 }
 
 export type Image = {

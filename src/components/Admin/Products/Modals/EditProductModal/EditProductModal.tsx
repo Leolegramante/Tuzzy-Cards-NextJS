@@ -1,6 +1,14 @@
 "use client";
 
-import {CancelButton, PriceInput, SubmitButton, TextArea, TextInput,} from "@/components";
+import {
+    CancelButton,
+    PriceInput,
+    ProductSizeInput,
+    ProductWeightInput,
+    SubmitButton,
+    TextArea,
+    TextInput,
+} from "@/components";
 import {CategoryDto, ProductDto, SubCategoryDto} from "@/helpers";
 import {Image as ImageType} from "@/helpers/dto/Register/products/product.dto";
 import {Dialog, DialogBackdrop, DialogPanel} from "@headlessui/react";
@@ -89,9 +97,13 @@ export const EditProductModal = ({
             sku: product.sku,
             price: String(product.price),
             quantityInStock: product.stock?.quantityInStock ? product.stock.quantityInStock : 0,
-            description: product.description,
+            description: product.description.replace(/<br\s*\/?>/gi, "\n"),
             categories: productsCategories,
             subCategories: productsSubCategories,
+            width: product.width || 0,
+            height: product.height || 0,
+            depth: product.depth || 0,
+            weight: product.weight || 0,
         }),
         [product, productsCategories, productsSubCategories]
     );
@@ -259,6 +271,13 @@ export const EditProductModal = ({
                                           rows={4}
                                           defaultValue={state.description}
                                 />
+
+                                <div className='flex items-start justify-center gap-4'>
+                                    <ProductSizeInput name='width' label='Comprimento' defaultValue={state.width}/>
+                                    <ProductSizeInput name='height' label='Altura' defaultValue={state.height}/>
+                                    <ProductSizeInput name='depth' label='largura' defaultValue={state.depth}/>
+                                    <ProductWeightInput name='weight' label='Peso' defaultValue={state.weight}/>
+                                </div>
 
                                 <div className="text-principal text-sm font-semibold">
                                     <label className="block mb-1">

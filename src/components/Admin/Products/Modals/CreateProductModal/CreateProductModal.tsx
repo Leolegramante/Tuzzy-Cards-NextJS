@@ -1,6 +1,14 @@
 "use client";
 
-import {CancelButton, PriceInput, SubmitButton, TextArea, TextInput,} from "@/components";
+import {
+    CancelButton,
+    PriceInput,
+    ProductSizeInput,
+    ProductWeightInput,
+    SubmitButton,
+    TextArea,
+    TextInput,
+} from "@/components";
 import {CategoryDto, ProductDto, SubCategoryDto} from "@/helpers";
 import {Dialog, DialogBackdrop, DialogPanel} from "@headlessui/react";
 import {XMarkIcon} from "@heroicons/react/24/outline";
@@ -71,6 +79,10 @@ export const CreateProductModal = ({
             description: "",
             categories: [],
             subCategories: [],
+            width: 0,
+            height: 0,
+            depth: 0,
+            weight: 0,
         }),
         []
     );
@@ -224,6 +236,13 @@ export const CreateProductModal = ({
                                           rows={4}
                                           defaultValue={state.description}
                                 />
+
+                                <div className='flex items-start justify-center gap-4'>
+                                    <ProductSizeInput name='width' label='Comprimento' defaultValue={state.width}/>
+                                    <ProductSizeInput name='height' label='Altura' defaultValue={state.height}/>
+                                    <ProductSizeInput name='depth' label='largura' defaultValue={state.depth}/>
+                                    <ProductWeightInput name='weight' label='Peso' defaultValue={state.weight}/>
+                                </div>
 
                                 <div className="text-principal text-sm font-semibold">
                                     <label className="block mb-1">
