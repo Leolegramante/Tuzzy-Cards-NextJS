@@ -21,7 +21,7 @@ export default function Home() {
             image: youtubeBanner
         },
         {
-            href: 'https://sideboard.com.br/products?subCategoryIds=20',
+            href: 'https://sideboard.com.br/products?categoryIds=20',
             image: lorcanaBanner
         }
     ];
