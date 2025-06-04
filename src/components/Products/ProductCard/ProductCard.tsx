@@ -11,7 +11,7 @@ export function ProductCard({product, mainSize, classname = ''}: {
     classname?: string
 }) {
     const {addItem} = useCartStore();
-
+    console.log(product);
     return (
         <div
             className={`relative group flex flex-col items-center justify-center bg-white rounded-lg shadow-md pt-2 ${classname}`}
@@ -40,24 +40,35 @@ export function ProductCard({product, mainSize, classname = ''}: {
             </Link>
 
             <div className="mt-2 w-full">
-                <button
-                    onClick={() => addItem({
-                        id: Number(product.id) || 0,
-                        price: product?.priceInCents ? product.priceInCents : 0,
-                        sku: product.sku,
-                        name: product.name,
-                        image: product.backendImages ? product.backendImages[0].url : '',
-                        inStock: true,
-                        width: product.width || 0,
-                        height: product.height || 0,
-                        depth: product.depth || 0,
-                        weight: product.weight || 0,
-                    })}
-                    type='button'
-                    className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-principal px-8 py-2 text-sm font-medium text-gray-50 hover:bg-gray-50 hover:text-principal hover:border-principal cursor-pointer"
-                >
-                    Adicionar ao carrinho<span className="sr-only">, {product.name}</span>
-                </button>
+                {product?.stock && product?.stock?.quantityInStock > 0 ? (
+                    <button
+                        onClick={() => addItem({
+                            id: Number(product.id) || 0,
+                            price: product?.priceInCents ? product.priceInCents : 0,
+                            sku: product.sku,
+                            name: product.name,
+                            image: product.backendImages ? product.backendImages[0].url : '',
+                            inStock: true,
+                            width: product.width || 0,
+                            height: product.height || 0,
+                            depth: product.depth || 0,
+                            weight: product.weight || 0,
+                        })}
+                        type='button'
+                        className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-principal px-8 py-2 text-sm font-medium text-gray-50 hover:bg-gray-50 hover:text-principal hover:border-principal cursor-pointer"
+                    >
+                        Adicionar ao carrinho<span className="sr-only">, {product.name}</span>
+                    </button>
+                ) : (
+                    <button
+                        type='button'
+                        className="relative w-full flex items-center justify-center rounded-md border border-transparent bg-gray-700 px-8 py-2 text-sm font-medium text-gray-50 cursor-not-allowed"
+                        disabled
+                    >
+                        Produto indisponível
+                    </button>
+                )}
+
             </div>
         </div>
     )
