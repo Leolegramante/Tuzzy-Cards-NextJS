@@ -1,9 +1,9 @@
-import {HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UsersIcon} from '@heroicons/react/20/solid'
+import {ArchiveBoxIcon, HomeIcon, ShoppingBagIcon, ShoppingCartIcon, UsersIcon} from '@heroicons/react/20/solid'
 
 const navigation = [
     {
         name: 'Home',
-        pathName: 'home',
+        pathName: 'dashboard',
         href: '/admin/dashboard',
         icon: HomeIcon
     },
@@ -24,6 +24,12 @@ const navigation = [
         pathName: 'orders',
         icon: ShoppingCartIcon,
         href: '/admin/orders',
+    },
+    {
+        name: 'Caixas de envio',
+        pathName: 'boxes',
+        icon: ArchiveBoxIcon,
+        href: '/admin/boxes',
     },
     // {
     //     name: 'Configurações',

@@ -1,8 +1,8 @@
 export type BoxDto = {
-    id: number;
+    id?: number;
     name: string;
     width: number;
     height: number;
     depth: number;
-    volume: number;
+    volume?: number;
 }

@@ -274,8 +274,8 @@ export const EditProductModal = ({
 
                                 <div className='flex items-start justify-center gap-4'>
                                     <ProductSizeInput name='width' label='Comprimento' defaultValue={state.width}/>
+                                    <ProductSizeInput name='depth' label='Largura' defaultValue={state.depth}/>
                                     <ProductSizeInput name='height' label='Altura' defaultValue={state.height}/>
-                                    <ProductSizeInput name='depth' label='largura' defaultValue={state.depth}/>
                                     <ProductWeightInput name='weight' label='Peso' defaultValue={state.weight}/>
                                 </div>
 

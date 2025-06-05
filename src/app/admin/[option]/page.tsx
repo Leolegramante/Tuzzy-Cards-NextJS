@@ -1,6 +1,6 @@
 'use client'
 
-import {AdminDashboard, AdminOptionsSidebar, Breadcrumbs, Orders, UsersAdminTable} from "@/components";
+import {AdminDashboard, AdminOptionsSidebar, Boxes, Breadcrumbs, Orders, UsersAdminTable} from "@/components";
 import {useParams, useSearchParams} from "next/navigation";
 import {useState} from 'react'
 
@@ -45,6 +45,9 @@ const AdminDashboardPage = () => {
                     )}
                     {option === 'orders' && (
                         <Orders/>
+                    )}
+                    {option === 'boxes' && (
+                        <Boxes currentPage={currentPage} limit={searchLimit}/>
                     )}
                 </div>
             </div>

@@ -49,7 +49,7 @@ export async function CreateBox(box: BoxDto): Promise<CreateBoxResponseDto> {
 
     const token = await getJWT()
     if (!token) return {isValid: false, message: 'Error',}
-
+    console.log(box)
     const response = await fetch(`${process.env.BASE_URL}/box`, {
         method: "POST",
         headers: {
@@ -78,7 +78,7 @@ export async function EditBox(box: BoxDto): Promise<EditBoxResponseDto> {
 
     const token = await getJWT()
     if (!token) return {isValid: false, message: 'Error',}
-
+    console.log(box)
     const response = await fetch(`${process.env.BASE_URL}/box/${box.id}`, {
         method: "PATCH",
         headers: {
