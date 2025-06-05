@@ -125,7 +125,6 @@ export const UpdateLegacyUser = async (data: UserDto): Promise<UpdateLegacyUserR
             },
             body: JSON.stringify(data),
         });
-        console.log(response)
         if (!response.ok) {
             return {isValid: false, message: `${response.status}`};
         }
@@ -165,6 +164,6 @@ export const GetUserProfile = async (): Promise<UserProfileResponseDto> => {
     if (responseData.isValid) {
         return responseData;
     }
-    
+
     return {isValid: false, message: `${response.status}`};
 }

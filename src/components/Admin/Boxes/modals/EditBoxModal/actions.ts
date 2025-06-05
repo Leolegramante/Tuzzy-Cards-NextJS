@@ -21,7 +21,6 @@ export type EditBoxState = {
 };
 
 const formatStringToNumber = (value: string): number => {
-    console.log(value)
     const formattedValue = value.replace(',', ""); // Remove non-numeric characters
     return parseInt(formattedValue);
 }

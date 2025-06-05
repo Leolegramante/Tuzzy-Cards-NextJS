@@ -32,8 +32,7 @@ export const signIn = async (
         }
 
         return {isValid: false, message: `${response.status}`};
-    } catch (e) {
-        console.log(e)
+    } catch {
         return {isValid: false, message: 'Error'}
     }
 };
@@ -59,8 +58,7 @@ export const VerifyEmail = async (email: string): Promise<VerifyEmailResponseDto
         }
 
         return {isValid: false, message: `${response.status}`};
-    } catch (e) {
-        console.log(e)
+    } catch {
         return {isValid: false, message: 'Error'}
     }
 }

@@ -26,7 +26,6 @@ export default function CheckoutInformation({onCheckoutAction, onOderCreatedActi
         setLoading(true)
         const products = items.map(product => ({id: product.id, quantity: product.quantity}))
         const {stockStatus, isValid} = await validateCart({products})
-        console.log(isValid)
         if (isValid) {
             const products = items.map(product => ({
                 productId: product.id,

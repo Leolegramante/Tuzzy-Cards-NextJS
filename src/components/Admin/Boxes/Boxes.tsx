@@ -33,7 +33,6 @@ export function Boxes({currentPage, limit}: { currentPage: number, limit: number
 
     const handleSelectBox = async (box: BoxDto) => {
         setSelectedBox(box);
-        console.log(box);
         await handleOpenBoxDetailsModalOpen();
     }
 

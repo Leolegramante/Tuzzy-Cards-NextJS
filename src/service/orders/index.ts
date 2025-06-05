@@ -102,7 +102,6 @@ export async function CreateOrder(createOrder: CreateOrderDto): Promise<CreateOr
     if (!token) return {isValid: false, message: 'Error'}
 
     createOrder.userUuid = session.uuid
-    console.log(createOrder)
     const response = await fetch(`${process.env.BASE_URL}/orders`, {
         method: "POST",
         headers: {
@@ -112,7 +111,7 @@ export async function CreateOrder(createOrder: CreateOrderDto): Promise<CreateOr
         },
         body: JSON.stringify(createOrder),
     });
-    
+
     if (!response.ok) {
         return {isValid: false, message: `${response.status}`};
     }

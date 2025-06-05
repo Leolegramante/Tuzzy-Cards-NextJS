@@ -11,7 +11,6 @@ export function ProductCard({product, mainSize, classname = ''}: {
     classname?: string
 }) {
     const {addItem} = useCartStore();
-    console.log(product);
     return (
         <div
             className={`relative group flex flex-col items-center justify-center bg-white rounded-lg shadow-md pt-2 ${classname}`}
