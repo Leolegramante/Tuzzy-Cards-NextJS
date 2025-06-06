@@ -12,11 +12,12 @@ export function SubmitButton({
                                  children,
                                  className,
                                  isLoading,
+                                 type = 'submit',
                                  ...props
                              }: SubmitButtonProps) {
     return (
         <button
-            type="submit"
+            type={type}
             className={cn(
                 "text-gray-50transition-colors inline-flex w-full justify-center rounded-lg bg-principal px-3 py-2 text-sm font-semibold cursor-pointer text-gray-50 hover:bg-fy active:bg-fy active:text-gray-50 disabled:opacity-50 disabled:pointer-events-none",
                 className
