@@ -5,15 +5,15 @@ import {
     CreateUserAddressResponseDTO,
     getJWT,
     getSession,
-    UserProfileResponseDto
+    GetUserAddressResponseDTO
 } from "@/helpers";
 
-export const GetUserAddresses = async (): Promise<UserProfileResponseDto> => {
+export const GetUserAddresses = async (): Promise<GetUserAddressResponseDTO> => {
     const userSession = await getSession()
-    if (!userSession) return {isValid: false, message: 'Error'}
+    if (!userSession) return {isValid: false, message: 'Error', address: []}
 
     const token = await getJWT()
-    if (!token) return {isValid: false, message: 'Error'}
+    if (!token) return {isValid: false, message: 'Error', address: []}
 
     const response = await fetch(`${process.env.BASE_URL}/users/address/${userSession.uuid}`, {
         method: "GET",
@@ -25,15 +25,15 @@ export const GetUserAddresses = async (): Promise<UserProfileResponseDto> => {
     })
 
     if (!response.ok) {
-        return {isValid: false, message: `${response.status}`};
+        return {isValid: false, message: `${response.status}`, address: []};
     }
 
-    const responseData: UserProfileResponseDto = await response.json();
+    const responseData: GetUserAddressResponseDTO = await response.json();
     if (responseData.isValid) {
         return responseData;
     }
 
-    return {isValid: false, message: `${response.status}`};
+    return {isValid: false, message: `${response.status}`, address: []};
 }
 
 export const CreateUserAddress = async (createUserAddress: CreateUserAddressDTO): Promise<CreateUserAddressResponseDTO> => {
