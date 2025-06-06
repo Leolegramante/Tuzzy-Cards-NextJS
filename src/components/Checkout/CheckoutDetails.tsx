@@ -15,6 +15,7 @@ import {useEffect, useState} from "react";
 export function CheckoutDetails() {
     const [userSession, setUserSession] = useState<decryptResponse | false>()
     const [isCreateOrderSuccessModalOpen, setIsCreateOrderSuccessModalOpen] = useState<boolean>(false);
+    const [error, setError] = useState<boolean>(false);
     const [orderCreated, setOrderCreated] = useState<OrderDto | null>(null);
     const {cleanCart} = useCartStore();
 
@@ -36,13 +37,18 @@ export function CheckoutDetails() {
         setOrderCreated(order)
     }
 
+    const handleSetError = () => {
+        setError((prevState) => !prevState);
+    }
+
     return (
         <div>
             {userSession ? (
                 <div>
-                    <CheckoutShippingOptions/>
+                    <CheckoutShippingOptions errors={error}/>
                     <CheckoutInformation onCheckoutAction={handleCreateOrderSuccessModalOpen}
-                                         onOderCreatedAction={handleOrderCreated}/>
+                                         onOderCreatedAction={handleOrderCreated}
+                                         handleSetErrorAction={handleSetError}/>
                 </div>
             ) : (
                 <div

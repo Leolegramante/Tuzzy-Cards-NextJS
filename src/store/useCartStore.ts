@@ -40,9 +40,10 @@ export interface CartItem extends Product {
 }
 
 export interface ShipmentItem {
-    id: string;
+    id: number | null;
     name: string;
     price: number;
+    boxId: number
 }
 
 interface CartState {
@@ -59,6 +60,7 @@ interface CartState {
     updateStock: (id: number, inStock: boolean) => void;
     cleanCart: () => void;
     getOrderVolume: () => number;
+    getOrderWeight: () => number;
 }
 
 // Criação da store com persistência
@@ -67,14 +69,10 @@ export const useCartStore = create<CartState>()(
         (set, get) => ({
             items: [],
             shipment: {
-                id: '',
-                name: '',
+                id: 0,
+                name: 'Retirada em loja',
                 price: 0,
-                inStock: true,
-                height: 0,
-                width: 0,
-                depth: 0,
-                weight: 0,
+                boxId: 0,
             },
             isCartOpen: false,
             toggleCart: () => set(state => ({isCartOpen: !state.isCartOpen})),
@@ -124,14 +122,23 @@ export const useCartStore = create<CartState>()(
                 }))
             },
             cleanCart: () => {
-                set({items: [], shipment: {id: '', name: '', price: 0}});
+                set({items: [], shipment: {id: null, name: '', price: 0, boxId: 0}});
             },
             getOrderVolume: () => {
                 const {items} = get();
                 return items.reduce((total, item) => {
                     return total + (item.width * item.height * item.depth * item.quantity);
                 }, 0);
-            }
+            },
+            getOrderWeight: () => {
+                const {items} = get();
+                return items.reduce((total, item) => {
+                    return total + (item.weight * item.quantity);
+                }, 0);
+            },
+            clearShipment: () => {
+                set({shipment: {id: null, name: '', price: 0, boxId: 0}});
+            },
         }),
         {
             name: 'cart', // Nome da chave no armazenamento

@@ -11,12 +11,17 @@ import {createOrder, validateCart} from "./actions";
 interface CheckoutInformationProps {
     onCheckoutAction: () => void;
     onOderCreatedAction: (order: OrderDto) => void
+    handleSetErrorAction: () => void
 }
 
-export default function CheckoutInformation({onCheckoutAction, onOderCreatedAction}: CheckoutInformationProps) {
+export default function CheckoutInformation({
+                                                onCheckoutAction,
+                                                onOderCreatedAction,
+                                                handleSetErrorAction
+                                            }: CheckoutInformationProps) {
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState(false);
-    const {items, getCartTotal, shipment, updateStock} = useCartStore();
+    const {items, getCartTotal, shipment, updateStock, getOrderWeight} = useCartStore();
 
     useEffect(() => {
         setTotal(getCartTotal());
@@ -26,21 +31,33 @@ export default function CheckoutInformation({onCheckoutAction, onOderCreatedActi
         setLoading(true)
         const products = items.map(product => ({id: product.id, quantity: product.quantity}))
         const {stockStatus, isValid} = await validateCart({products})
-        if (isValid) {
-            const products = items.map(product => ({
-                productId: product.id,
-                quantity: product.quantity,
-                price: product.price
-            }))
-            const createOrderResponse = await createOrder({products, total: total + shipment.price})
-            if (createOrderResponse.isValid && createOrderResponse.order) {
-                onOderCreatedAction(createOrderResponse.order)
-                onCheckoutAction()
+
+        if (shipment.boxId === 0) {
+            handleSetErrorAction()
+        } else {
+            if (isValid && shipment.boxId !== 0) {
+                const products = items.map(product => ({
+                    productId: product.id,
+                    quantity: product.quantity,
+                    price: product.price
+                }))
+                const weight = getOrderWeight()
+                const createOrderResponse = await createOrder({
+                    products,
+                    total: total + shipment.price,
+                    weight,
+                    boxId: shipment.boxId
+                })
+
+                if (createOrderResponse.isValid && createOrderResponse.order) {
+                    onOderCreatedAction(createOrderResponse.order)
+                    onCheckoutAction()
+                }
+            } else if (!isValid && stockStatus.length > 0) {
+                stockStatus.map((item) => {
+                    updateStock(item.id, item.inStock)
+                })
             }
-        } else if (!isValid && stockStatus.length > 0) {
-            stockStatus.map((item) => {
-                updateStock(item.id, item.inStock)
-            })
         }
         setLoading(false)
     }
@@ -64,11 +81,11 @@ export default function CheckoutInformation({onCheckoutAction, onOderCreatedActi
                             <dd className="text-base font-medium text-gray-900">{formatCentsToBRL(total + shipment.price)}</dd>
                         </div>
                     </dl>
-                    <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
+                    <div className="border-t border-gray-200 p-4 ">
                         <SubmitButton
                             onClick={validateCartAction}
                             type="submit"
-                            className="text-base font-medium text-fy shadow-xs hover:bg-fy hover:text-principal"
+                            className="text-base font-medium text-fy shadow-xs hover:bg-fy hover:text-principal disabled:cursor-not-allowed"
                             isLoading={loading}
                         >
                             Prosseguir para pagamento

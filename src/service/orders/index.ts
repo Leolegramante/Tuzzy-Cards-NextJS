@@ -111,7 +111,6 @@ export async function CreateOrder(createOrder: CreateOrderDto): Promise<CreateOr
         },
         body: JSON.stringify(createOrder),
     });
-
     if (!response.ok) {
         return {isValid: false, message: `${response.status}`};
     }
