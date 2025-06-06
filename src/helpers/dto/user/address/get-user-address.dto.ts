@@ -1,15 +1,8 @@
-import {UserDto} from "@/helpers";
-
 export type GetUserAddressResponseDTO = {
     isValid: boolean;
     message: string;
-    user: UserWithAddress
+    address: Address[]
 }
-
-interface UserWithAddress extends UserDto {
-    addresses: Address[]
-}
-
 export type Address = {
     id?: number
     street: string
