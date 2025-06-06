@@ -3,6 +3,7 @@
 import {
     CreateUserAddressDTO,
     CreateUserAddressResponseDTO,
+    GetAddressFromZipCodeDto,
     getJWT,
     getSession,
     GetUserAddressResponseDTO
@@ -63,4 +64,32 @@ export const CreateUserAddress = async (createUserAddress: CreateUserAddressDTO)
     }
 
     return {isValid: false, message: `${response.status}`};
+}
+
+export const GetAddressFromZipCode = async (zipCode: string): Promise<GetAddressFromZipCodeDto> => {
+    const userSession = await getSession()
+    if (!userSession) return {isValid: false}
+
+    const token = await getJWT()
+    if (!token) return {isValid: false}
+
+    const response = await fetch(`${process.env.BASE_URL}/users/address/zipcode/${zipCode}`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            'Authorization': `Bearer ${token}`,
+            "Content-Type": "application/json",
+        },
+    })
+
+    if (!response.ok) {
+        return {isValid: false};
+    }
+
+    const responseData: GetAddressFromZipCodeDto = await response.json();
+    if (responseData.isValid) {
+        return responseData;
+    }
+
+    return {isValid: false};
 }
