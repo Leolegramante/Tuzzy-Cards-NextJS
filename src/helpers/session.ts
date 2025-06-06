@@ -1,4 +1,4 @@
-import "server-only";
+'use server'
 
 import {decrypt} from "@/helpers/jwt";
 import {cookies} from "next/headers";
@@ -15,7 +15,6 @@ export async function createSession(session: string) {
 }
 
 export async function deleteSession() {
-    'use server'
     return (await cookies()).delete("session");
 }
 
