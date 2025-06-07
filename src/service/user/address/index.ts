@@ -44,8 +44,10 @@ export const CreateUserAddress = async (createUserAddress: CreateUserAddressDTO)
     const token = await getJWT()
     if (!token) return {isValid: false, message: 'Error'}
 
+    createUserAddress.uuid = userSession.uuid
+
     const response = await fetch(`${process.env.BASE_URL}/users/address`, {
-        method: "GET",
+        method: "POST",
         headers: {
             Accept: "application/json",
             'Authorization': `Bearer ${token}`,

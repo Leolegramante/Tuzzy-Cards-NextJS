@@ -5,9 +5,9 @@ const publicRoutes = ['/', '/about', '/contact', '/auth/sign-in', '/auth/sign-up
 const authRoutes = ['/auth/sign-in', '/auth/sign-up']; // Páginas de autenticação
 const roleBasedRoutes = {
     ADMIN: [], // Admin tem acesso a todas as páginas
-    EDITOR: ['/editor', '/editor/:id', '/dashboard', '/profile', '/settings'], // Editor pode ver as rotas de usuário e editor dinâmico
-    SELLER: ['/seller', '/dashboard', '/profile', '/settings', '/editor', '/editor/:id'], // Seller pode ver as mesmas rotas de usuários e editores
-    USER: ['/profile', '/settings'],
+    EDITOR: ['/editor', '/editor/:id', '/dashboard', '/profile', '/settings', '/checkout/payment'], // Editor pode ver as rotas de usuário e editor dinâmico
+    SELLER: ['/seller', '/dashboard', '/profile', '/settings', '/editor', '/editor/:id', '/checkout/payment'], // Seller pode ver as mesmas rotas de usuários e editores
+    USER: ['/profile', '/settings', '/checkout/payment'],
 };
 
 export default async function middleware(req: NextRequest) {

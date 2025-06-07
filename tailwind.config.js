@@ -19,13 +19,20 @@ module.exports = {
             },
             backgroundColor: {
                 principal: 'var(--pricipal)',
-            }
+            },
+            animation: {
+                'shimmer': 'shimmer 1.5s ease-in-out infinite',
+            },
         },
         keyframes: {
             rotateClockwise: {
                 '0%': {transform: 'rotate(0deg)'},
                 '100%': {transform: 'rotate(360deg)'},
             },
+            shimmer: {
+                '0%': {backgroundPosition: '-200% 0'},
+                '100%': {backgroundPosition: '200% 0'},
+            }
         },
         animation: {
             rotateClockwise: 'rotateClockwise 20s linear infinite',
