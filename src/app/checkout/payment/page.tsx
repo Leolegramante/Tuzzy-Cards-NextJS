@@ -1,4 +1,4 @@
-import {AddressInformation, PageContainer} from "@/components";
+import {AddressInformation, PageContainer, PaymentInformation} from "@/components";
 import {revalidatePath} from "next/cache";
 import {Suspense} from "react";
 import {getUserAddress} from "./actions";
@@ -15,9 +15,12 @@ export default async function CheckOutPage() {
         <PageContainer>
             <h2 className="sr-only">Payment</h2>
             <div className="lg:grid lg:grid-cols-2 lg:gap-x-12 xl:gap-x-8">
-                <Suspense fallback={<AddressInformationSkeleton/>}>
-                    <AddressInformation addresses={addresses} onUserCreatedAction={refreshAddresses}/>
-                </Suspense>
+                <div>
+                    <Suspense fallback={<AddressInformationSkeleton/>}>
+                        <AddressInformation addresses={addresses} onUserCreatedAction={refreshAddresses}/>
+                    </Suspense>
+                    <PaymentInformation/>
+                </div>
             </div>
         </PageContainer>
     );
