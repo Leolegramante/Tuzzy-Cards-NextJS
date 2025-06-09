@@ -1,0 +1,1 @@
+export {useDeviceInfo} from './useDeviceInfo';
