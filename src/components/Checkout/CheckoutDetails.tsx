@@ -4,38 +4,19 @@ import {getUserSession} from "@/components/Checkout/actions";
 import CheckoutInformation from "@/components/Checkout/CheckoutInformation";
 import CheckoutShippingOptions from "@/components/Checkout/CheckoutShippingOptions";
 import CheckoutSignInForm from "@/components/Checkout/CheckoutSignInForm/CheckoutSignInForm";
-import {CreateOrderSuccessModal} from "@/components/Checkout/Modals";
-import {OrderDto} from "@/helpers";
 import {decryptResponse} from "@/helpers/jwt";
-import {useCartStore} from "@/store/useCartStore";
 import Link from "next/link";
-import {redirect} from "next/navigation";
 import {useEffect, useState} from "react";
 
 export function CheckoutDetails() {
     const [userSession, setUserSession] = useState<decryptResponse | false>()
-    const [isCreateOrderSuccessModalOpen, setIsCreateOrderSuccessModalOpen] = useState<boolean>(false);
     const [error, setError] = useState<boolean>(false);
-    const [orderCreated, setOrderCreated] = useState<OrderDto | null>(null);
-    const {cleanCart} = useCartStore();
 
     useEffect(() => {
         getUserSession().then((res) => {
             if (res) setUserSession(res);
         })
     }, []);
-
-    const handleCreateOrderSuccessModalOpen = () => {
-        if (isCreateOrderSuccessModalOpen) {
-            cleanCart()
-            redirect('/')
-        }
-        setIsCreateOrderSuccessModalOpen((prevState) => !prevState);
-    }
-
-    const handleOrderCreated = (order: OrderDto) => {
-        setOrderCreated(order)
-    }
 
     const handleSetError = () => {
         setError((prevState) => !prevState);
@@ -46,9 +27,8 @@ export function CheckoutDetails() {
             {userSession ? (
                 <div>
                     <CheckoutShippingOptions errors={error}/>
-                    <CheckoutInformation onCheckoutAction={handleCreateOrderSuccessModalOpen}
-                                         onOderCreatedAction={handleOrderCreated}
-                                         handleSetErrorAction={handleSetError}/>
+                    <CheckoutInformation
+                        handleSetErrorAction={handleSetError}/>
                 </div>
             ) : (
                 <div
@@ -62,10 +42,6 @@ export function CheckoutDetails() {
                         </Link>
                     </div>
                 </div>
-            )}
-            {isCreateOrderSuccessModalOpen && orderCreated && (
-                <CreateOrderSuccessModal isOpen={isCreateOrderSuccessModalOpen}
-                                         onClose={handleCreateOrderSuccessModalOpen} order={orderCreated}/>
             )}
         </div>
     )

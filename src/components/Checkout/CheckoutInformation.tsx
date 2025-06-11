@@ -1,27 +1,23 @@
 'use client'
 
 import {SubmitButton} from "@/components";
-import {OrderDto} from "@/helpers";
 import {useCartStore} from "@/store/useCartStore";
 import {formatCentsToBRL} from "@/utils";
 import Link from "next/link";
+import {redirect} from "next/navigation";
 import {useEffect, useState} from "react";
-import {createOrder, validateCart} from "./actions";
+import {validateCart} from "./actions";
 
 interface CheckoutInformationProps {
-    onCheckoutAction: () => void;
-    onOderCreatedAction: (order: OrderDto) => void
     handleSetErrorAction: () => void
 }
 
 export default function CheckoutInformation({
-                                                onCheckoutAction,
-                                                onOderCreatedAction,
                                                 handleSetErrorAction
                                             }: CheckoutInformationProps) {
     const [total, setTotal] = useState<number>(0);
     const [loading, setLoading] = useState(false);
-    const {items, getCartTotal, shipment, updateStock, getOrderWeight} = useCartStore();
+    const {items, getCartTotal, shipment, updateStock} = useCartStore();
 
     useEffect(() => {
         setTotal(getCartTotal());
@@ -36,23 +32,7 @@ export default function CheckoutInformation({
             handleSetErrorAction()
         } else {
             if (isValid && shipment.boxId !== 0) {
-                const products = items.map(product => ({
-                    productId: product.id,
-                    quantity: product.quantity,
-                    price: product.price
-                }))
-                const weight = getOrderWeight()
-                const createOrderResponse = await createOrder({
-                    products,
-                    total: total + shipment.price,
-                    weight,
-                    boxId: shipment.boxId
-                })
-
-                if (createOrderResponse.isValid && createOrderResponse.order) {
-                    onOderCreatedAction(createOrderResponse.order)
-                    onCheckoutAction()
-                }
+                redirect('/checkout/payment')
             } else if (!isValid && stockStatus.length > 0) {
                 stockStatus.map((item) => {
                     updateStock(item.id, item.inStock)

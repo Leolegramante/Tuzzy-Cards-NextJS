@@ -43,12 +43,23 @@ export interface ShipmentItem {
     id: number | null;
     name: string;
     price: number;
-    boxId: number
+    boxId: number;
+    addressId?: number;
+}
+
+export interface Card {
+    type: string;
+    number: string;
+    name: string;
+    expiry: string;
+    cvv: string
+    installments: number
 }
 
 interface CartState {
     items: CartItem[];
     shipment: ShipmentItem;
+    card: Card
     isCartOpen: boolean;
     toggleCart: () => void;
     addItem: (product: Product) => void;
@@ -61,6 +72,7 @@ interface CartState {
     cleanCart: () => void;
     getOrderVolume: () => number;
     getOrderWeight: () => number;
+    addCard: (card: Card) => void;
 }
 
 // Criação da store com persistência
@@ -73,6 +85,14 @@ export const useCartStore = create<CartState>()(
                 name: 'Retirada em loja',
                 price: 0,
                 boxId: 0,
+            },
+            card: {
+                cvv: '',
+                expiry: '',
+                installments: 0,
+                name: '',
+                type: '',
+                number: ''
             },
             isCartOpen: false,
             toggleCart: () => set(state => ({isCartOpen: !state.isCartOpen})),
@@ -136,9 +156,9 @@ export const useCartStore = create<CartState>()(
                     return total + (item.weight * item.quantity);
                 }, 0);
             },
-            clearShipment: () => {
-                set({shipment: {id: null, name: '', price: 0, boxId: 0}});
-            },
+            addCard: (card) => {
+                set({card: card});
+            }
         }),
         {
             name: 'cart', // Nome da chave no armazenamento

@@ -3,6 +3,7 @@
 import {PostalCode} from "@/components/Checkout/PostalCode/PostalCode";
 import {ValidShipmentDto} from "@/helpers";
 import {useCartStore} from "@/store/useCartStore";
+import {formatCentsToBRL} from "@/utils";
 import {useCallback, useState} from "react";
 import {calculateShipment} from "./actions";
 
@@ -65,7 +66,7 @@ export default function CheckoutShippingOptions({errors}: { errors: boolean }) {
                         <input
                             id={`${shipmentItem.id}`}
                             onChange={() => handleShipmentChange({
-                                price: (Number(shipmentItem.price) - Number(shipmentItem.discount)) * 100,
+                                price: Number(shipmentItem.price) * 100,
                                 name: shipmentItem.name,
                                 id: shipmentItem.id,
                                 boxId
@@ -78,7 +79,7 @@ export default function CheckoutShippingOptions({errors}: { errors: boolean }) {
                         />
                         <div className="ml-3 text-sm">
                             <label htmlFor={`${shipmentItem.id}`} className="font-medium text-principal">
-                                {shipmentItem.name} - {shipmentItem.price === '0' ? 'Grátis' : `R$ ${(Number(shipmentItem.price) - Number(shipmentItem.discount))}`} -
+                                {shipmentItem.name} - {shipmentItem.price === '0' ? 'Grátis' : `${formatCentsToBRL(Number(shipmentItem.price) * 100)}`} -
                                 Prazo: {shipmentItem.delivery_time === 1 ? `${shipmentItem.delivery_time} dia úteis` : `${shipmentItem.delivery_time} dias úteis`}
                             </label>
                         </div>

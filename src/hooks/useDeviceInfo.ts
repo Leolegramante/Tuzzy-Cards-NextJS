@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 
 interface DeviceInfo {
     userAgent: string;
-    ipAddress?: string;
+    ipAddress: string;
     deviceData: {
         colorDepth: number;
         screenHeight: number;
@@ -11,8 +11,19 @@ interface DeviceInfo {
     };
 }
 
-export const useDeviceInfo = () => {
-    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo | null>(null);
+const initialState: DeviceInfo = {
+    userAgent: '',
+    ipAddress: '',
+    deviceData: {
+        colorDepth: 0,
+        screenHeight: 0,
+        screenWidth: 0,
+        timeZoneOffset: 0
+    }
+}
+
+export const UseDeviceInfo = () => {
+    const [deviceInfo, setDeviceInfo] = useState<DeviceInfo>(initialState);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -38,6 +49,7 @@ export const useDeviceInfo = () => {
                 console.error('Erro ao obter informações do dispositivo:', error);
                 // Fallback com dados básicos se houver erro
                 const fallbackInfo: DeviceInfo = {
+                    ipAddress: '192.168.0.1',
                     userAgent: window.navigator.userAgent,
                     deviceData: {
                         colorDepth: 24,

@@ -29,7 +29,6 @@ export function AddressRegistration({onUserCreatedAction, className = ''}: Addre
             setUserAddress(address);
         }
         setIsloading(false);
-        console.log(userAddress)
     };
 
     return (

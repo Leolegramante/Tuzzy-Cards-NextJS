@@ -1,5 +1,6 @@
 'use client'
 
+import {useCartStore} from "@/store/useCartStore";
 import valid from 'card-validator';
 import {useState} from 'react';
 import {
@@ -30,6 +31,7 @@ type CardDataField = keyof CardData;
 export function PaymentInformation() {
     const [selectedMethod, setSelectedMethod] = useState<PaymentMethod>('');
     const [ccBrand, setCcBrand] = useState<string>('');
+    const {addCard} = useCartStore()
 
     const [cardData, setCardData] = useState<CardData>({
         number: '',
@@ -55,7 +57,27 @@ export function PaymentInformation() {
         }
 
         setCardData(prev => ({...prev, [field]: value}));
+        addCard({
+            type: selectedMethod,
+            number: cardData.number.replace(/ /g, ""),
+            name: cardData.name,
+            expiry: cardData.expiry,
+            cvv: cardData.cvv,
+            installments: Number(cardData.installments)
+        });
     };
+
+    const handleMethodChange = (paymentMethod: PaymentMethod) => {
+        setSelectedMethod(paymentMethod)
+        addCard({
+            type: paymentMethod,
+            number: '',
+            name: '',
+            expiry: '',
+            cvv: '',
+            installments: 0
+        });
+    }
 
     return (
         <div className="bg-white px-6 py-4 mt-4 shadow-sm sm:rounded-lg sm:px-12 w-full">
@@ -73,7 +95,7 @@ export function PaymentInformation() {
                                 ? 'border-principal bg-blue-50'
                                 : 'border-gray-200 hover:border-gray-300'
                         }`}
-                        onClick={() => setSelectedMethod('credit')}
+                        onClick={() => handleMethodChange('credit')}
                     >
                         <div className="flex items-center">
                             <input
@@ -211,7 +233,7 @@ export function PaymentInformation() {
                                 ? 'border-principal bg-blue-50'
                                 : 'border-gray-200 hover:border-gray-300'
                         }`}
-                        onClick={() => setSelectedMethod('pix')}
+                        onClick={() => handleMethodChange('pix')}
                     >
                         <div className="flex items-center">
                             <input

@@ -1,14 +1,29 @@
+'use client'
+
 import {AddressAccordion} from "@/components/Checkout/Payment/AddressInformation/AddressAccordion";
 import {Address} from "@/helpers";
+import {useEffect} from "react";
 
 interface AddressSelectionProps {
     addresses: Address[];
-    onAddressCreated: () => void
+    onAddressCreatedAction: () => void
+    handleSelectedAddressChangeAction: (address: Address) => void
 }
 
-export function AddressSelection({addresses, onAddressCreated}: AddressSelectionProps) {
+export function AddressSelection({
+                                     addresses,
+                                     onAddressCreatedAction,
+                                     handleSelectedAddressChangeAction
+                                 }: AddressSelectionProps) {
+    const defaultSelectAddress = addresses.filter((address) => address.isDefault)
+
+    useEffect(() => {
+        handleSelectedAddressChangeAction(defaultSelectAddress[0])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
     return (
-        <div>
+        <div className='bg-white px-6 py-4 mt-4 shadow-sm sm:rounded-lg sm:px-12'>
             <div className="mb-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-2">Endereço de entrega</h2>
                 <p className="text-gray-600">Escolha o endereço que deseja receber sua compra</p>
@@ -19,6 +34,7 @@ export function AddressSelection({addresses, onAddressCreated}: AddressSelection
                     <div className="flex h-6 items-center">
                         <input
                             defaultChecked={address.isDefault}
+                            onChange={() => handleSelectedAddressChangeAction(address)}
                             id={`${address.id}`}
                             name='address'
                             type="radio"
@@ -37,7 +53,7 @@ export function AddressSelection({addresses, onAddressCreated}: AddressSelection
                     </div>
                 </div>
             ))}
-            <AddressAccordion onAddressCreatedAction={onAddressCreated}/>
+            <AddressAccordion onAddressCreatedAction={onAddressCreatedAction}/>
         </div>
     );
 }
